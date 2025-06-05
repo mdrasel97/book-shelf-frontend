@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 // import logoImg from "../../assets/logo.png";
 import { ModeToggle } from "../ui/mode-toggle";
 import { BookOpen } from "lucide-react";
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
   const links = (
     <>
       <li>
@@ -15,6 +18,16 @@ const Navbar = () => {
       </li>
     </>
   );
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.success("Sign Out Successfully");
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
   return (
     <nav>
       <div className="navbar shadow-sm">
@@ -55,10 +68,20 @@ const Navbar = () => {
         </div>
         <div className="navbar-end space-x-3">
           <ModeToggle />
-          <Link to={"/signIn"} className="btn border border-primary">
-            Sign In
-          </Link>
-          <Link className="btn btn-primary">Sign Up</Link>
+          {user ? (
+            <button onClick={handleSignOut} className="btn">
+              Log Out
+            </button>
+          ) : (
+            <>
+              <Link to={"/signIn"} className="btn border border-primary">
+                Sign In
+              </Link>
+              <Link to={"/signUp"} className="btn btn-primary">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>

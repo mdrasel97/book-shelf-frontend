@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../components/navbar/Navbar";
-import { Outlet } from "react-router";
+import { Outlet, useNavigation } from "react-router";
 import Footer from "../components/footer/Footer";
+import { AuthContext } from "../context/AuthContext";
+import Loading from "../components/Loading";
 
 const RootLayOut = () => {
+  const { loading } = useContext(AuthContext);
+
+  const navigation = useNavigation();
+  if (navigation.state === "loading") {
+    return <Loading />;
+  }
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="md:container mx-auto">
       <Navbar />

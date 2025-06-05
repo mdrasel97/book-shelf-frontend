@@ -1,16 +1,60 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+  const { signInUser, googleLogIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleSignIn = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const { email, password } = Object.fromEntries(formData);
+
+    // firebase Auth
+    signInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
+
+  const handleGoogleSignIn = () => {
+    googleLogIn()
+      .then((result) => {
+        const user = result.user;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(`${location.state ? location.state : "/"}`);
+      })
+      .catch((error) => {
+        toast.error(error);
+      });
+  };
   return (
     <div className="w-full max-w-md p-8 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-20">
       <h1 className="text-2xl font-bold text-center">Welcome Back</h1>
-      <form
-        // onSubmit={handleSignIn}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSignIn} className="space-y-6">
         <div className="space-y-1 text-sm">
           <label htmlFor="email" className="block">
             Email
@@ -40,7 +84,10 @@ const SignIn = () => {
             </a>
           </div>
         </div>
-        <button className="block w-full p-3 text-center rounded-sm dark:text-gray-50 dark:bg-primary">
+        <button
+          type="submit"
+          className="block w-full bg-primary text-white p-3 text-center rounded-sm"
+        >
           Sign in
         </button>
       </form>
@@ -53,7 +100,7 @@ const SignIn = () => {
       </div>
       <div className="flex justify-center space-x-4">
         <button
-          // onClick={handleGoogleSignIn}
+          onClick={handleGoogleSignIn}
           aria-label="Log in with Google"
           className="p-3 rounded-sm"
         >
