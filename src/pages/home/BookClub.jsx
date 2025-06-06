@@ -29,13 +29,11 @@ const BookClub = () => {
     },
   ];
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Join Our Book Club
-          </h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-3xl font-bold mb-4">Join Our Book Club</h2>
+          <p className="text-lg">
             Connect with fellow readers and join exciting discussions
           </p>
         </div>
@@ -43,7 +41,7 @@ const BookClub = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Book club info */}
           <div className="animate-fade-in">
-            <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl p-8">
+            <div className="border border-blue-500 rounded-2xl p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 Why Join Our Community?
               </h3>
