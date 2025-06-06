@@ -16,6 +16,19 @@ const Navbar = () => {
       <li>
         <NavLink to={"bookShelf"}>Book shelf </NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to={"addBook"}>Add Book </NavLink>
+          </li>
+          <li>
+            <NavLink to={"myBooks"}>My Books </NavLink>
+          </li>
+          <li>
+            <NavLink to={"profile"}>Profile </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 

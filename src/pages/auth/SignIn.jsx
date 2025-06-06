@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { Button } from "../../components/ui/button";
 
 const SignIn = () => {
   const { signInUser, googleLogIn } = useContext(AuthContext);
@@ -84,12 +85,13 @@ const SignIn = () => {
             </a>
           </div>
         </div>
-        <button
+        <Button
           type="submit"
-          className="block w-full bg-primary text-white p-3 text-center rounded-sm"
+          className="block w-full bg-[var(--background)] text-[var(--primary)]"
+          variant={"outline"}
         >
           Sign in
-        </button>
+        </Button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
