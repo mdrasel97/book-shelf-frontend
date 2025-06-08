@@ -9,6 +9,7 @@ import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
 import AddBook from "../pages/addBook/AddBook";
 import MyBooks from "../pages/myBooks/MyBooks";
 import Profile from "../pages/profile/Profile";
+import BookDetails from "../pages/bookShelf/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,13 @@ export const router = createBrowserRouter([
       {
         path: "bookShelf",
         Component: BookShelf,
+        loader: () => fetch("http://localhost:3000/books"),
+      },
+      {
+        path: "bookDetails/:id",
+        Component: BookDetails,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/books/${params.id}`),
       },
       {
         path: "addBook",

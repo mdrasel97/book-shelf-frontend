@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
 
 const AddBook = () => {
+  const { user } = useContext(AuthContext);
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const bookData = Object.fromEntries(formData.entries());
+    const { ...restBookData } = Object.fromEntries(formData.entries());
     // console.log(data);
 
-    // const BooksInfo = {};
+    // const BooksInfo = {
+    // bookData,
+    //
+    // };
+    const userProfile = {
+      email: user?.email,
+      name: user?.displayName,
+      ...restBookData,
+    };
 
     // mongodb add book
     fetch("http://localhost:3000/books", {
@@ -17,7 +27,7 @@ const AddBook = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(bookData),
+      body: JSON.stringify(userProfile),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -77,8 +87,6 @@ const AddBook = () => {
                 type="number"
                 id="total_page"
                 name="total_page"
-                //   value={book.total_page}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
                 required
               />
@@ -92,8 +100,6 @@ const AddBook = () => {
                 type="text"
                 id="book_author"
                 name="book_author"
-                //   value={book.book_author}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
                 required
               />
@@ -107,8 +113,6 @@ const AddBook = () => {
               <select
                 id="book_category"
                 name="book_category"
-                //   value={book.reading_status}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
                 required
               >
@@ -127,8 +131,6 @@ const AddBook = () => {
               <select
                 id="reading_status"
                 name="reading_status"
-                //   value={book.reading_status}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
                 required
               >
@@ -139,6 +141,7 @@ const AddBook = () => {
               </select>
             </div>
 
+            {/* User email (Read-only) */}
             <div className="flex flex-col">
               <label htmlFor="user_email" className="mb-1 text-sm">
                 Your Email
@@ -147,13 +150,13 @@ const AddBook = () => {
                 type="email"
                 id="user_email"
                 name="user_email"
-                //   value={book.user_email}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
-                required
+                value={user?.email}
+                readOnly
               />
             </div>
 
+            {/* User name (Read-only) */}
             <div className="flex flex-col">
               <label htmlFor="user_name" className="mb-1 text-sm">
                 Your Name
@@ -162,10 +165,9 @@ const AddBook = () => {
                 type="text"
                 id="user_name"
                 name="user_name"
-                //   value={book.user_name}
-                //   onChange={handleChange}
                 className="p-3 rounded border border-blue-500"
-                required
+                value={user?.displayName}
+                readOnly
               />
             </div>
           </div>
