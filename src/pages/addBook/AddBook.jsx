@@ -151,7 +151,7 @@ const AddBook = () => {
                 id="user_email"
                 name="user_email"
                 className="p-3 rounded border border-blue-500"
-                value={user?.email}
+                defaultValue={user?.email}
                 readOnly
               />
             </div>
@@ -166,7 +166,7 @@ const AddBook = () => {
                 id="user_name"
                 name="user_name"
                 className="p-3 rounded border border-blue-500"
-                value={user?.displayName}
+                defaultValue={user?.displayName}
                 readOnly
               />
             </div>
