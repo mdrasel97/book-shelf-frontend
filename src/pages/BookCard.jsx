@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, User } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 
@@ -68,11 +68,9 @@ const BookCard = ({ book }) => {
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2">
-          {book_title}
-        </h3>
-        <div className="flex items-center text-gray-600 mb-4">
-          {/* <User className="h-4 w-4 mr-1" /> */}
+        <h3 className="text-xl font-bold mb-2 line-clamp-2">{book_title}</h3>
+        <div className="flex items-center mb-4">
+          <User className="h-4 w-4 mr-1" />
           <span className="text-sm">{book_author}</span>
         </div>
 
