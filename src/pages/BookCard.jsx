@@ -1,3 +1,4 @@
+import { ArrowUp } from "lucide-react";
 import React from "react";
 import { Link } from "react-router";
 
@@ -10,6 +11,7 @@ const BookCard = ({ book }) => {
     book_author,
     book_category,
     reading_status,
+    upvoteCount,
   } = book;
 
   const getStatusColor = (status) => {
@@ -77,8 +79,8 @@ const BookCard = ({ book }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <button className="flex items-center space-x-1 text-blue-600 hover:text-blue-700 transition-colors">
-              {/* <ArrowUp className="h-4 w-4" /> */}
-              {/* <span className="text-sm font-medium">{book.upvotes}</span> */}
+              <ArrowUp className="h-4 w-4" />
+              <span className="text-sm font-medium">{upvoteCount}</span>
             </button>
           </div>
 

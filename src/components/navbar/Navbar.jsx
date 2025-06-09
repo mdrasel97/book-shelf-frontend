@@ -5,6 +5,7 @@ import { ModeToggle } from "../ui/mode-toggle";
 import { BookOpen } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
+import { Typewriter } from "react-simple-typewriter";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -73,7 +74,17 @@ const Navbar = () => {
           <div className="flex justify-center">
             {/* <img className="w-10" src={logoImg} alt="" /> */}
             <BookOpen className="h-8 w-8 text-blue-400" />
-            <h2 className="text-2xl font-bold">Book Shelf</h2>
+            <h2 className="text-2xl font-bold">
+              <Typewriter
+                words={["Book Shelf", "Virtual Bookshelf"]}
+                loop={0}
+                // cursor
+                // cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={50}
+                delaySpeed={1000}
+              />
+            </h2>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
