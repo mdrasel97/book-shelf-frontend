@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthContext";
+import { useLocation, useNavigate } from "react-router";
 
 const AddBook = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -39,6 +42,8 @@ const AddBook = () => {
           showConfirmButton: false,
           timer: 1500,
         });
+        form.reset();
+        navigate(`${location.state ? location.state : "/bookShelf"}`);
       });
   };
   return (

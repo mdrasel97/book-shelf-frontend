@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const UpdateBooks = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const {
     _id,
     book_title,
@@ -45,7 +47,7 @@ const UpdateBooks = () => {
           timer: 1500,
         });
         form.reset();
-        // setSelectedLifestyle([]);
+        navigate(`${location.state ? location.state : "/myBooks"}`);
       });
   };
   return (
