@@ -66,38 +66,6 @@ const MyBooks = () => {
       }
     });
   };
-  // const handleDelete = (id) => {
-  //   // console.log(id);
-  //   Swal.fire({
-  //     title: "Are you sure?",
-  //     text: "You won't be able to revert this!",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, delete it!",
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       fetch(`https://roommate-finder-server-mu.vercel.app/roommates/${id}`, {
-  //         method: "DELETE",
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           if (data.deletedCount) {
-  //             const remaining = listings.filter(
-  //               (listing) => listing._id !== id
-  //             );
-  //             setListings(remaining);
-  //             Swal.fire({
-  //               title: "Deleted!",
-  //               text: "Your Roommate has been deleted.",
-  //               icon: "success",
-  //             });
-  //           }
-  //         });
-  //     }
-  //   });
-  // };
   return (
     <div className="p-4">
       <h2 className="text-xl font-semibold mb-4 w-11/12 mx-auto">My Books</h2>
@@ -159,7 +127,7 @@ const MyBooks = () => {
                   </td>
                   <th className="space-x-2 flex">
                     <Link
-                      to={`/updatedRoommate/${item._id}`}
+                      to={`/updateBook/${item._id}`}
                       className="btn btn-primary"
                     >
                       <FaPenFancy size={25} />
