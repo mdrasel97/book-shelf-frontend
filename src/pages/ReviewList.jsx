@@ -1,21 +1,61 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
+import Swal from "sweetalert2";
 
 const ReviewList = ({ bookId }) => {
   const [reviews, setReviews] = useState([]);
+  const [existingReview, setExistingReview] = useState(null);
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     if (bookId) {
       fetch(`http://localhost:3000/reviews/${bookId}`)
         .then((res) => res.json())
-        .then((data) => setReviews(data))
+        .then((data) => {
+          setReviews(data);
+          const found = data.find(
+            (review) => review.user_email === user?.email
+          );
+          if (found) {
+            setExistingReview(found); // এটা true বা review object হবে
+          }
+        })
         .catch((err) => console.error("Failed to load reviews:", err));
     }
-  }, [bookId]);
+  }, [bookId, user?.email]);
 
-  // const handleDelete = async (id) => {
-  //   await axios.delete(`/api/reviews/${id}`);
-  //   fetchReviews();
-  // };
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/reviews/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount) {
+              // Assuming setReviews is your state for reviews
+              const remaining = reviews.filter((review) => review._id !== id);
+              setReviews(remaining);
+
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your review has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="mt-10">
@@ -30,16 +70,16 @@ const ReviewList = ({ bookId }) => {
             <strong>Comment:</strong> {review.comment}
           </p>
           <p className="text-sm text-gray-500">
-            By: {review.user?.displayName || "Anonymous"}
+            By: {review.user_name || "Anonymous"}
           </p>
-          {/* {currentUser?.id === review.user?._id && (
+          {user?.email === review.user_email && (
             <button
               onClick={() => handleDelete(review._id)}
               className="mt-2 text-sm text-red-600"
             >
               Delete
             </button>
-          )} */}
+          )}
         </div>
       ))}
     </div>

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 // import logoImg from "../../assets/logo.png";
 import { ModeToggle } from "../ui/mode-toggle";
 import { BookOpen } from "lucide-react";
@@ -9,6 +9,8 @@ import { Typewriter } from "react-simple-typewriter";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
   const links = (
     <>
       <li>
@@ -37,6 +39,7 @@ const Navbar = () => {
     signOutUser()
       .then(() => {
         toast.success("Sign Out Successfully");
+        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
         toast.error(error);

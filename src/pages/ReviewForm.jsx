@@ -1,13 +1,10 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const ReviewForm = ({ bookId }) => {
-  console.log(bookId);
+  // console.log(bookId);
   const { user } = useContext(AuthContext);
-  // const [existingReview, setExistingReview] = useState(null);
-  // const [rating, setRating] = useState(5);
-  // const [comment, setComment] = useState("");
-  // const [error, setError] = useState("");
+  const [existingReview, setExistingReview] = useState(null);
 
   const handleReview = async (e) => {
     e.preventDefault();
@@ -15,13 +12,7 @@ const ReviewForm = ({ bookId }) => {
     const form = e.target;
     const formData = new FormData(form);
     const { ...restData } = Object.fromEntries(formData.entries());
-    console.log(restData);
-
-    // const bookReview = {
-    //   ...restData,
-    //   book_id: bookId,
-    //   createdAt: new Date(),
-    // };
+    // console.log(restData);
     const bookReview = {
       ...restData,
       book_id: bookId,
@@ -41,7 +32,8 @@ const ReviewForm = ({ bookId }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        // ✅ Reset form
+        setExistingReview(bookReview);
+        // Reset form
         form.reset();
       });
   };
@@ -51,9 +43,9 @@ const ReviewForm = ({ bookId }) => {
 
   return (
     <form onSubmit={handleReview} className="mt-8">
-      {/* <h3 className="text-xl font-bold mb-2">
+      <h3 className="text-xl font-bold mb-2">
         {existingReview ? "Edit Your Review" : "Write a Review"}
-      </h3> */}
+      </h3>
 
       {/* {error && <p className="text-red-600 mb-2">{error}</p>} */}
 
@@ -87,7 +79,7 @@ const ReviewForm = ({ bookId }) => {
         type="submit"
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
-        {/* {existingReview ? "Update Review" : "Submit Review"} */}
+        {existingReview ? "Update Review" : "Submit Review"}
       </button>
     </form>
   );
