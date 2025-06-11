@@ -17,9 +17,16 @@ const ReviewForm = ({ bookId }) => {
     const { ...restData } = Object.fromEntries(formData.entries());
     console.log(restData);
 
+    // const bookReview = {
+    //   ...restData,
+    //   book_id: bookId,
+    //   createdAt: new Date(),
+    // };
     const bookReview = {
       ...restData,
       book_id: bookId,
+      user_email: user?.email,
+      user_name: user?.displayName,
       createdAt: new Date(),
     };
 
@@ -34,26 +41,9 @@ const ReviewForm = ({ bookId }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        // ✅ Reset form
+        form.reset();
       });
-    // // Extra hidden fields
-    // formData.append("bookId", bookId);
-    // formData.append("userId", user?._id || ""); // adjust this depending on your auth
-    // formData.append("email", user?.email || "");
-
-    // try {
-    //   const res = await axios.post("/api/reviews", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   });
-
-    //   alert("✅ Review submitted successfully!");
-    //   setComment("");
-    //   setRating(5);
-    //   setError("");
-    // } catch (err) {
-    //   setError(err.response?.data?.message || "Something went wrong.");
-    // }
   };
 
   if (!user)
