@@ -5,6 +5,7 @@ import BookClub from "./BookClub";
 import { Link, useLoaderData } from "react-router";
 import BookCard from "../BookCard";
 import { FaArrowRightLong } from "react-icons/fa6";
+import ExploreCategory from "./ExploreCategory";
 
 const Home = () => {
   const books = useLoaderData();
@@ -30,6 +31,7 @@ const Home = () => {
         </div>
       </div>
       <ReadingStates />
+      <ExploreCategory></ExploreCategory>
       <BookClub />
     </div>
   );

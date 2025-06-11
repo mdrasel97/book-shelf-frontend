@@ -66,6 +66,7 @@ export const router = createBrowserRouter([
             <Profile />
           </PrivateRoute>
         ),
+        loader: () => fetch(`http://localhost:3000/book_category`),
       },
       {
         path: "signIn",

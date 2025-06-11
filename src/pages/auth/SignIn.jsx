@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { Button } from "../../components/ui/button";
 
 const SignIn = () => {
-  const { signInUser, googleLogIn } = useContext(AuthContext);
+  const { signInUser, googleLogIn, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const handleSignIn = (e) => {
@@ -18,20 +18,44 @@ const SignIn = () => {
     const { email, password } = Object.fromEntries(formData);
 
     // firebase Auth
+    // signInUser(email, password)
+    //   .then((result) => {
+    //     const user = result.user;
+    //     console.log(user);
+    //     Swal.fire({
+    //       position: "center",
+    //       icon: "success",
+    //       title: "Your work has been saved",
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     });
+    //     navigate(`${location?.state ? location?.state : "/"}`);
+    //   })
+    //   .catch((error) => {
+    //     toast.error(error);
+    //   });
+
     signInUser(email, password)
       .then((result) => {
+        setLoading(false);
         const user = result.user;
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
+        toast.success("Sign In success");
         navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        toast.error(error);
+        setLoading(false);
+
+        const errorCode = error.code;
+
+        if (errorCode === "auth/user-not-found") {
+          toast.error(
+            "No account found with this email. Please register first."
+          );
+        } else if (errorCode === "auth/wrong-password") {
+          toast.error("Incorrect password. Please try again.");
+        } else {
+          toast.error(error.message);
+        }
       });
   };
 
@@ -46,7 +70,7 @@ const SignIn = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(`${location.state ? location.state : "/"}`);
+        navigate(`${location?.state ? location?.state : "/"}`);
       })
       .catch((error) => {
         toast.error(error);
@@ -105,6 +129,7 @@ const SignIn = () => {
           onClick={handleGoogleSignIn}
           aria-label="Log in with Google"
           className="p-3 rounded-sm"
+          type="button"
         >
           <FcGoogle size={25} />
         </button>

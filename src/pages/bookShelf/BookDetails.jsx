@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
+import ReviewForm from "../ReviewForm";
+import ReviewList from "../ReviewList";
 
 const BookDetails = () => {
   const { user } = useContext(AuthContext);
@@ -100,20 +102,14 @@ const BookDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* ✅ Review Form */}
+      <ReviewForm bookId={_id} />
+
+      {/* ✅ Review List */}
+      <ReviewList bookId={_id} />
     </div>
   );
 };
 
 export default BookDetails;
-
-//  <button
-//         onClick={handleLike}
-//         className={`px-4 py-2 rounded text-white ${
-//           user.email === email
-//             ? "bg-gray-400 cursor-not-allowed"
-//             : "bg-primary hover:bg-secondary"
-//         }`}
-//         disabled={user.email === email}
-//       >
-//         👍 Like
-//       </button>

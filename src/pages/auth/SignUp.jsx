@@ -4,69 +4,125 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser, googleLogIn } = useContext(AuthContext);
   // const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  // const handleSignUp = (e) => {
+  //   e.preventDefault();
+  //   const form = e.target;
+  //   const formData = new FormData(form);
+  //   const { email, password, ...restData } = Object.fromEntries(
+  //     formData.entries()
+  //   );
+  //   // console.log(restData);
+
+  //   // Password validation
+  //   // if (password.length < 6) {
+  //   //   setPasswordError("Password must be at least 6 characters long");
+  //   //   return;
+  //   // }
+  //   // if (!/[A-Z]/.test(password)) {
+  //   //   setPasswordError("Password must contain at least one uppercase letter");
+  //   //   return;
+  //   // }
+  //   // if (!/[a-z]/.test(password)) {
+  //   //   setPasswordError("Password must contain at least one lowercase letter");
+  //   //   return;
+  //   // }
+
+  //   createUser(email, password)
+  //     .then((result) => {
+  //       // console.log(result);
+  //       const user = result.user;
+  //       const userProfile = {
+  //         ...restData,
+  //         email,
+  //         creationTime: user?.metadata?.creationTime,
+  //         lastSignInTime: user?.metadata?.lastSignInTime,
+  //       };
+
+  //       // save to my database
+  //       fetch("http://localhost:3000/users", {
+  //         method: "POST",
+  //         headers: {
+  //           "content-type": "application/json",
+  //         },
+  //         body: JSON.stringify(userProfile),
+  //       })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           console.log(data);
+  //           Swal.fire({
+  //             position: "center",
+  //             icon: "success",
+  //             title: "Your work has been saved",
+  //             showConfirmButton: false,
+  //             timer: 1500,
+  //           });
+  //         });
+  //       navigate(`${location.state ? location.state : "/"}`);
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error);
+  //     });
+  // };
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const { email, password, ...restData } = Object.fromEntries(
+    const { email, password, name, photo } = Object.fromEntries(
       formData.entries()
     );
-    // console.log(restData);
-
-    // Password validation
-    // if (password.length < 6) {
-    //   setPasswordError("Password must be at least 6 characters long");
-    //   return;
-    // }
-    // if (!/[A-Z]/.test(password)) {
-    //   setPasswordError("Password must contain at least one uppercase letter");
-    //   return;
-    // }
-    // if (!/[a-z]/.test(password)) {
-    //   setPasswordError("Password must contain at least one lowercase letter");
-    //   return;
-    // }
 
     createUser(email, password)
       .then((result) => {
-        // console.log(result);
-
-        const userProfile = {
-          ...restData,
-          email,
-          creationTime: result.user?.metadata?.creationTime,
-          lastSignInTime: result.user?.metadata?.lastSignInTime,
-        };
-
-        // save to my database
-        fetch("http://localhost:3000/users", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(userProfile),
+        const user = result.user;
+        // Update profile here
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photo,
         })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500,
-            });
+          .then(() => {
+            // Prepare user profile for your DB
+            const userProfile = {
+              name,
+              email,
+              photo,
+              creationTime: user.metadata.creationTime,
+              lastSignInTime: user.metadata.lastSignInTime,
+            };
+
+            // Save userProfile to your DB
+            fetch("http://localhost:3000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(userProfile),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Your work has been saved",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate(location.state ? location.state : "/");
+              });
+          })
+          .catch((error) => {
+            toast.error("Profile update failed: " + error.message);
           });
-        navigate(`${location.state ? location.state : "/"}`);
       })
       .catch((error) => {
-        toast.error(error);
+        toast.error(error.message);
       });
   };
 
