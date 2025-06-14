@@ -12,7 +12,7 @@ const ExploreCategory = () => {
     axios
       .get("http://localhost:3000/books-summary")
       .then((res) => {
-        console.log("Summary data:", res.data); // ✅ Debug
+        console.log("Summary data:", res.data);
         setSummary(res.data);
       })
       .catch((err) => console.error("Error fetching summary:", err));

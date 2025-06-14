@@ -9,19 +9,27 @@ import Swal from "sweetalert2";
 
 const MyBooks = () => {
   const { user, loading } = useContext(AuthContext);
+  // console.log("token in the context", user.accessToken);
   const [listingLoading, setListingLoading] = useState(false);
   const [listings, setListings] = useState([]);
-  console.log(listings);
+  // console.log(listings);
 
   useEffect(() => {
     const email = user?.email;
+    const token = user.accessToken;
+    console.log("user token", token);
     if (!email) return;
     // setLoading(true);
     setListingLoading(true);
 
-    fetch(`http://localhost:3000/my-books/${email}`)
+    fetch(`http://localhost:3000/my-books/${email}`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
+        // console.log(" Received data:", data);
         setListings(data);
         // setLoading(false);
         setListingLoading(false);
