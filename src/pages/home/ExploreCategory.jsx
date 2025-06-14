@@ -1,50 +1,65 @@
+import { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const ExploreCategory = () => {
-  const [categoryBooks, setCategoryBooks] = useState({});
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    const fetchCategoryBooks = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/all_category");
-        setCategoryBooks(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const [summary, setSummary] = useState({
+    totalBooks: 0,
+    booksByCategory: [],
+  });
 
-    fetchCategoryBooks();
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/books-summary")
+      .then((res) => {
+        console.log("Summary data:", res.data); // ✅ Debug
+        setSummary(res.data);
+      })
+      .catch((err) => console.error("Error fetching summary:", err));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  const COLORS = [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff8042",
+    "#00C49F",
+    "#ff6384",
+    "#36a2eb",
+  ];
+
   return (
-    <div className="p-4 space-y-10">
-      {Object.entries(categoryBooks).map(([category, books]) => (
-        <div key={category}>
-          <h2 className="text-2xl font-bold mb-4">{category} Books</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {books.map((book) => (
-              <div key={book._id} className="border rounded-lg p-4 shadow-md">
-                <img
-                  src={book.cover_photo}
-                  alt={book.book_title}
-                  className="w-full h-48 object-cover mb-2 rounded"
-                />
-                <h3 className="text-xl font-semibold">{book.book_title}</h3>
-                <p className="text-sm text-gray-600">
-                  Author: {book.book_author}
-                </p>
-                <p className="text-sm text-gray-500">
-                  Pages: {book.total_page}
-                </p>
-              </div>
+    <div className="p-5">
+      <h2 className="text-2xl font-bold mb-4">
+        Total Books: {summary.totalBooks}
+      </h2>
+
+      <h3 className="text-xl font-semibold mb-4">Books by Category</h3>
+
+      {summary.booksByCategory.length > 0 ? (
+        <PieChart width={400} height={300}>
+          <Pie
+            data={summary.booksByCategory}
+            dataKey="count"
+            nameKey="_id"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            label
+          >
+            {summary.booksByCategory.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
-          </div>
-        </div>
-      ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      ) : (
+        <p>Loading or no category data found.</p>
+      )}
     </div>
   );
 };

@@ -66,7 +66,7 @@ const SignIn = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your work has been saved",
+          title: "google signIn successfully",
           showConfirmButton: false,
           timer: 1500,
         });

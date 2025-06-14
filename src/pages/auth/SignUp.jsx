@@ -97,7 +97,7 @@ const SignUp = () => {
               lastSignInTime: user.metadata.lastSignInTime,
             };
 
-            // Save userProfile to your DB
+            // Save userProfile to my DB
             fetch("http://localhost:3000/users", {
               method: "POST",
               headers: {
@@ -110,7 +110,7 @@ const SignUp = () => {
                 Swal.fire({
                   position: "center",
                   icon: "success",
-                  title: "Your work has been saved",
+                  title: "user create successfully",
                   showConfirmButton: false,
                   timer: 1500,
                 });

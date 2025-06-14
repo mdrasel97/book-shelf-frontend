@@ -1,41 +1,75 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const ReviewForm = ({ bookId }) => {
-  // console.log(bookId);
   const { user } = useContext(AuthContext);
   const [existingReview, setExistingReview] = useState(null);
+  const [rating, setRating] = useState("5");
+  const [comment, setComment] = useState("");
+
+  useEffect(() => {
+    if (user && bookId) {
+      fetch(`http://localhost:3000/my-review/${bookId}?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data._id) {
+            setExistingReview(data);
+            setRating(data.rating?.toString() || "5");
+            setComment(data.comment || "");
+          }
+        });
+    }
+  }, [user, bookId]);
 
   const handleReview = async (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const formData = new FormData(form);
-    const { ...restData } = Object.fromEntries(formData.entries());
-    // console.log(restData);
     const bookReview = {
-      ...restData,
+      rating,
+      comment,
       book_id: bookId,
       user_email: user?.email,
       user_name: user?.displayName,
-      createdAt: new Date(),
+      updatedAt: new Date(),
     };
 
-    // review data for mongodb
-    fetch("http://localhost:3000/reviews", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(bookReview),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setExistingReview(bookReview);
-        // Reset form
-        form.reset();
-      });
+    if (existingReview) {
+      // Update existing review
+      fetch(`http://localhost:3000/reviews/${existingReview._id}`, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(bookReview),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Review updated:", data);
+          // setExistingReview({ ...existingReview, ...bookReview });
+          setExistingReview({ ...bookReview, _id: existingReview._id });
+        });
+    } else {
+      // Create new review
+      fetch("http://localhost:3000/reviews", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ ...bookReview, createdAt: new Date() }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("Review created:", data);
+          // setExistingReview(data);
+          setExistingReview({ ...bookReview, _id: data.insertedId });
+          toast.success("Review submitted!");
+        });
+    }
+
+    // Reset form state
+    setRating("5");
+    setComment("");
   };
 
   if (!user)
@@ -47,13 +81,12 @@ const ReviewForm = ({ bookId }) => {
         {existingReview ? "Edit Your Review" : "Write a Review"}
       </h3>
 
-      {/* {error && <p className="text-red-600 mb-2">{error}</p>} */}
-
       <div className="mb-2">
         <label className="block mb-1">Rating:</label>
         <select
           name="rating"
-          // defaultValue={rating}
+          value={rating}
+          onChange={(e) => setRating(e.target.value)}
           className="border rounded p-2"
         >
           {[1, 2, 3, 4, 5].map((r) => (
@@ -68,7 +101,8 @@ const ReviewForm = ({ bookId }) => {
         <label className="block mb-1">Comment:</label>
         <textarea
           name="comment"
-          // defaultValue={comment}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
           className="w-full border rounded p-2"
           rows={3}
           required

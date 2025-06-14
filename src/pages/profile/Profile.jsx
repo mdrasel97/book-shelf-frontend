@@ -1,66 +1,83 @@
-import React, { useContext } from "react";
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { useLoaderData } from "react-router";
+import axios from "axios";
+import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#3B82F6"];
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-  const data = useLoaderData();
-  console.log(data);
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (user?.email) {
+      axios
+        .get(`http://localhost:3000/bookshelf-summary/${user.email}`)
+        .then((res) => {
+          setSummary(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setLoading(false);
+        });
+    }
+  }, [user]);
+
+  if (loading) return <div className="text-center mt-10">Loading...</div>;
+
+  if (!summary)
+    return <div className="text-center mt-10 text-red-500">No data found</div>;
 
   return (
     <div className="max-w-5xl mx-auto mt-10 p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">👤 Profile Page</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* User Info */}
-        <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center">
-          <img
-            src={user?.photoURL}
-            alt="Profile"
-            className="w-24 h-24 rounded-full border-4 border-indigo-500 mb-4"
-          />
-          <h2 className="text-xl font-semibold">{user.displayName}</h2>
-          <p className="text-gray-500">{user.email}</p>
-        </div>
-
-        {/* Bookshelf Summary */}
-        <div className="bg-white rounded-2xl shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">📚 Bookshelf Summary</h3>
-          <p className="mb-2">
-            Total Books:{" "}
-            <span className="font-bold">{/* {bookshelf.totalBooks} */}</span>
-          </p>
-          {/* <ul className="list-disc list-inside space-y-1">
-            {bookshelf.booksByCategory.map((cat, index) => (
-              <li key={index}>
-                {cat._id}: <span className="font-bold">{cat.count}</span>
-              </li>
-            ))}
-          </ul> */}
-        </div>
+      {/* User Info */}
+      <div className="bg-white rounded-2xl shadow p-6 flex flex-col items-center mb-8">
+        <img
+          src={user.photoURL}
+          alt="Profile"
+          className="w-24 h-24 rounded-full border-4 border-indigo-500 mb-4"
+        />
+        <h2 className="text-xl font-semibold">{user.displayName}</h2>
+        <p className="text-gray-500">{user.email}</p>
       </div>
 
-      {/* Pie Chart */}
-      <div className="bg-white rounded-2xl shadow mt-8 p-6">
-        <h3 className="text-lg font-semibold mb-4">📊 Books by Category</h3>
+      {/* Bookshelf Summary */}
+      <div className="bg-white rounded-2xl shadow p-6">
+        <h3 className="text-lg font-semibold mb-4">📚 Bookshelf Summary</h3>
+        <p className="mb-2">
+          Total Books: <span className="font-bold">{summary.totalBooks}</span>
+        </p>
+
+        <ul className="list-disc list-inside mb-6">
+          {summary.booksByCategory.map(({ category, count }) => (
+            <li key={category}>
+              {category}: <span className="font-bold">{count}</span>
+            </li>
+          ))}
+        </ul>
+
+        {/* Pie Chart */}
         <div className="flex justify-center">
           <PieChart width={350} height={350}>
             <Pie
-              // data={bookshelf.booksByCategory}
+              data={summary.booksByCategory}
               dataKey="count"
-              nameKey="_id"
+              nameKey="category"
               cx="50%"
               cy="50%"
               outerRadius={120}
-              fill="#8884d8"
               label
             >
-              {/* {bookshelf.booksByCategory.map((entry, index) => ( */}
-              <Cell key={`cell-`} fill={COLORS[COLORS.length]} />
-              {/* ))} */}
+              {summary.booksByCategory.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
             </Pie>
             <Tooltip />
             <Legend />

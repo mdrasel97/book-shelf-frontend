@@ -46,7 +46,7 @@ const Navbar = () => {
       });
   };
   return (
-    <nav>
+    <nav className="fixed top-0 w-full bg-white dark:bg-black shadow z-50 lg:container mx-auto">
       <div className="navbar shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -74,20 +74,24 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center items-center gap-2">
             {/* <img className="w-10" src={logoImg} alt="" /> */}
-            <BookOpen className="h-8 w-8 text-blue-400" />
-            <h2 className="text-2xl font-bold">
-              <Typewriter
-                words={["Book Shelf", "Virtual Bookshelf"]}
-                loop={0}
-                // cursor
-                // cursorStyle="_"
-                typeSpeed={70}
-                deleteSpeed={50}
-                delaySpeed={1000}
-              />
-            </h2>
+            <div>
+              <BookOpen className="h-8 w-8 text-blue-400" />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold">
+                <Typewriter
+                  words={["Book Shelf", "Virtual Bookshelf"]}
+                  loop={0}
+                  // cursor
+                  // cursorStyle="_"
+                  typeSpeed={70}
+                  deleteSpeed={50}
+                  delaySpeed={1000}
+                />
+              </h2>
+            </div>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
