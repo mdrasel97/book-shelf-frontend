@@ -1,28 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+// components/ReviewList.jsx
+
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Swal from "sweetalert2";
 
-const ReviewList = ({ bookId }) => {
-  const [reviews, setReviews] = useState([]);
-  const [existingReview, setExistingReview] = useState(null);
+const ReviewList = ({ reviews, setReviews }) => {
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (bookId) {
-      fetch(`https://book-shelf-server-phi.vercel.app/reviews/${bookId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setReviews(data);
-          const found = data.find(
-            (review) => review.user_email === user?.email
-          );
-          if (found) {
-            setExistingReview(found); // এটা true বা review object হবে
-          }
-        })
-        .catch((err) => console.error("Failed to load reviews:", err));
-    }
-  }, [bookId, user?.email]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -40,17 +23,10 @@ const ReviewList = ({ bookId }) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.deletedCount) {
-              // Assuming setReviews is your state for reviews
-              const remaining = reviews.filter((review) => review._id !== id);
+              const remaining = reviews.filter((r) => r._id !== id);
               setReviews(remaining);
-
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your review has been deleted.",
-                icon: "success",
-              });
+              Swal.fire("Deleted!", "Your review has been deleted.", "success");
             }
           });
       }
@@ -75,7 +51,7 @@ const ReviewList = ({ bookId }) => {
           {user?.email === review.user_email && (
             <button
               onClick={() => handleDelete(review._id)}
-              className="mt-2 text-sm text-red-600"
+              className="mt-2 text-sm text-red-600 hover:underline"
             >
               Delete
             </button>

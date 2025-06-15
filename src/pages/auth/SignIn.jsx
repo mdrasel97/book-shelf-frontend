@@ -77,7 +77,7 @@ const SignIn = () => {
       });
   };
   return (
-    <div className="w-full max-w-md p-8 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-20">
+    <div className="w-full max-w-md p-10 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-16 ">
       <h1 className="text-2xl font-bold text-center">Welcome Back</h1>
       <form onSubmit={handleSignIn} className="space-y-6">
         <div className="space-y-1 text-sm">
@@ -89,7 +89,7 @@ const SignIn = () => {
             name="email"
             id="email"
             placeholder="jon@duo.com"
-            className="w-full px-4 py-3 rounded-md border focus:border-primary"
+            className="w-full px-4 py-3 rounded-md border border-blue-500 focus:border-primary"
           />
         </div>
         <div className="space-y-1 text-sm">
@@ -101,7 +101,7 @@ const SignIn = () => {
             name="password"
             id="password"
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-md border focus:dark:border-primary"
+            className="w-full px-4 py-3 rounded-md border border-blue-500"
           />
           <div className="flex justify-end text-xs mt-3 dark:text-gray-600">
             <a rel="noopener noreferrer" href="#">
@@ -111,7 +111,7 @@ const SignIn = () => {
         </div>
         <Button
           type="submit"
-          className="block w-full bg-[var(--background)] text-[var(--primary)]"
+          className="block w-full bg-blue-500 text-[var(--primary)]"
           variant={"outline"}
         >
           Sign in

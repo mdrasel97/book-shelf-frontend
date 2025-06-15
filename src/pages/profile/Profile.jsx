@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { Link } from "react-router";
 
 const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#3B82F6"];
 
@@ -51,6 +52,10 @@ const Profile = () => {
           />
           <h2 className="text-xl font-semibold">{user.displayName}</h2>
           <p className="">{user.email}</p>
+
+          <Link className="btn btn-primary mt-2" to={"/editProfile"}>
+            Edit Profile
+          </Link>
         </div>
 
         {/*  Bookshelf Summary */}

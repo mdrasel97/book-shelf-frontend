@@ -1,5 +1,7 @@
 import { BookOpen, Mail, MapPin } from "lucide-react";
+import { FaFacebook, FaTwitter } from "react-icons/fa6";
 import { Link } from "react-router";
+import { RiInstagramFill } from "react-icons/ri";
 
 const Footer = () => {
   return (
@@ -19,22 +21,22 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a
-                href="#"
+                href="https://web.facebook.com/mollarasel24/"
                 className="text-slate-400 hover:text-blue-400 transition-colors"
               >
-                Facebook
+                <FaFacebook size={25} />
               </a>
               <a
-                href="#"
+                href="https://x.com/"
                 className="text-slate-400 hover:text-blue-400 transition-colors"
               >
-                Twitter
+                <FaTwitter size={25} />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/"
                 className="text-slate-400 hover:text-blue-400 transition-colors"
               >
-                Instagram
+                <RiInstagramFill size={25} />
               </a>
             </div>
           </div>

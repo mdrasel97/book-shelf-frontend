@@ -121,7 +121,7 @@ const AddBook = () => {
               <select
                 id="book_category"
                 name="book_category"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-blue-500 bg-background text-foreground"
                 required
               >
                 <option value="">Select Book Category</option>
@@ -139,7 +139,7 @@ const AddBook = () => {
               <select
                 id="reading_status"
                 name="reading_status"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-blue-500 bg-background text-foreground"
                 required
               >
                 <option value="">Select Reading Status</option>

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import ReviewForm from "../ReviewForm";
 import ReviewList from "../ReviewList";
 import ReadingTracker from "../../components/ReadingTracker";
+import ReviewSection from "../../components/ReviewSection";
 
 const BookDetails = () => {
   const { user } = useContext(AuthContext);
@@ -117,11 +118,8 @@ const BookDetails = () => {
       </div>
 
       <div className="max-w-4xl mx-auto p-6 border border-blue-500 rounded-2xl shadow-lg mt-5 mb-5">
-        {/* ✅ Review Form */}
-        <ReviewForm bookId={_id} />
-
-        {/* ✅ Review List */}
-        <ReviewList bookId={_id} />
+        {/* ✅ Review Section */}
+        <ReviewSection bookId={_id} />
       </div>
     </>
   );

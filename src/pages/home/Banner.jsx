@@ -88,7 +88,7 @@ const Banner = () => {
                   size="lg"
                   className="bg-primary px-8 py-3"
                 >
-                  <Link to="/login">
+                  <Link to="/signIn">
                     <User className="h-5 w-5 mr-2" />
                     Join Now
                   </Link>

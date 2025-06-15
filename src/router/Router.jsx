@@ -12,6 +12,7 @@ import Profile from "../pages/profile/Profile";
 import BookDetails from "../pages/bookShelf/BookDetails";
 import UpdateBooks from "../pages/myBooks/UpdateBooks";
 import Loading from "../components/Loading";
+import EditProfile from "../pages/profile/EditProfile";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "editProfile",
+        element: (
+          <PrivateRoute>
+            <EditProfile></EditProfile>
           </PrivateRoute>
         ),
       },

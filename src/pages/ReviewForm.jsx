@@ -1,36 +1,29 @@
+// components/ReviewForm.jsx
+
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
-const ReviewForm = ({ bookId }) => {
+const ReviewForm = ({ bookId, reviews, setReviews }) => {
   const { user } = useContext(AuthContext);
-  const [existingReview, setExistingReview] = useState(null);
+  const existingReview = reviews.find(
+    (r) => r.user_email === user?.email && r.book_id === bookId
+  );
+
   const [rating, setRating] = useState("5");
   const [comment, setComment] = useState("");
 
   useEffect(() => {
-    const token = user?.accessToken;
-    if (user && bookId) {
-      fetch(
-        `https://book-shelf-server-phi.vercel.app/my-review/${bookId}?email=${user.email}`,
-        {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data._id) {
-            setExistingReview(data);
-            setRating(data.rating?.toString() || "5");
-            setComment(data.comment || "");
-          }
-        });
+    if (existingReview) {
+      setRating(existingReview.rating?.toString() || "5");
+      setComment(existingReview.comment || "");
+    } else {
+      setRating("5");
+      setComment("");
     }
-  }, [user, bookId]);
+  }, [existingReview]);
 
-  const handleReview = async (e) => {
+  const handleReview = (e) => {
     e.preventDefault();
 
     const bookReview = {
@@ -43,42 +36,37 @@ const ReviewForm = ({ bookId }) => {
     };
 
     if (existingReview) {
-      // Update existing review
       fetch(
         `https://book-shelf-server-phi.vercel.app/reviews/${existingReview._id}`,
         {
           method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
+          headers: { "content-type": "application/json" },
           body: JSON.stringify(bookReview),
         }
       )
         .then((res) => res.json())
-        .then((data) => {
-          console.log("Review updated:", data);
-          // setExistingReview({ ...existingReview, ...bookReview });
-          setExistingReview({ ...bookReview, _id: existingReview._id });
+        .then(() => {
+          const updated = reviews.map((r) =>
+            r._id === existingReview._id ? { ...r, ...bookReview } : r
+          );
+          setReviews(updated);
+          toast.success("Review updated!");
         });
     } else {
-      // Create new review
       fetch("https://book-shelf-server-phi.vercel.app/reviews", {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...bookReview, createdAt: new Date() }),
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log("Review created:", data);
-          // setExistingReview(data);
-          setExistingReview({ ...bookReview, _id: data.insertedId });
+          const newReview = { ...bookReview, _id: data.insertedId };
+          setReviews([newReview, ...reviews]);
           toast.success("Review submitted!");
         });
     }
 
-    // Reset form state
+    // Reset fields
     setRating("5");
     setComment("");
   };
@@ -95,7 +83,6 @@ const ReviewForm = ({ bookId }) => {
       <div className="mb-2">
         <label className="block mb-1">Rating:</label>
         <select
-          name="rating"
           value={rating}
           onChange={(e) => setRating(e.target.value)}
           className="border rounded p-2"
@@ -111,7 +98,6 @@ const ReviewForm = ({ bookId }) => {
       <div className="mb-2">
         <label className="block mb-1">Comment:</label>
         <textarea
-          name="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           className="w-full border rounded p-2"
