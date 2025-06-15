@@ -46,7 +46,7 @@ const SignUp = () => {
   //       };
 
   //       // save to my database
-  //       fetch("http://localhost:3000/users", {
+  //       fetch("https://book-shelf-server-phi.vercel.app/users", {
   //         method: "POST",
   //         headers: {
   //           "content-type": "application/json",
@@ -98,7 +98,7 @@ const SignUp = () => {
             };
 
             // Save userProfile to my DB
-            fetch("http://localhost:3000/users", {
+            fetch("https://book-shelf-server-phi.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

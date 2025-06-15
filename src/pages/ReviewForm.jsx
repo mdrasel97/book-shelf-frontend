@@ -9,8 +9,16 @@ const ReviewForm = ({ bookId }) => {
   const [comment, setComment] = useState("");
 
   useEffect(() => {
+    const token = user?.accessToken;
     if (user && bookId) {
-      fetch(`http://localhost:3000/my-review/${bookId}?email=${user.email}`)
+      fetch(
+        `https://book-shelf-server-phi.vercel.app/my-review/${bookId}?email=${user.email}`,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data && data._id) {
@@ -36,13 +44,16 @@ const ReviewForm = ({ bookId }) => {
 
     if (existingReview) {
       // Update existing review
-      fetch(`http://localhost:3000/reviews/${existingReview._id}`, {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(bookReview),
-      })
+      fetch(
+        `https://book-shelf-server-phi.vercel.app/reviews/${existingReview._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(bookReview),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log("Review updated:", data);
@@ -51,7 +62,7 @@ const ReviewForm = ({ bookId }) => {
         });
     } else {
       // Create new review
-      fetch("http://localhost:3000/reviews", {
+      fetch("https://book-shelf-server-phi.vercel.app/reviews", {
         method: "POST",
         headers: {
           "content-type": "application/json",

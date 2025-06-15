@@ -17,12 +17,12 @@ const MyBooks = () => {
   useEffect(() => {
     const email = user?.email;
     const token = user.accessToken;
-    console.log("user token", token);
+    // console.log("user token", token);
     if (!email) return;
     // setLoading(true);
     setListingLoading(true);
 
-    fetch(`http://localhost:3000/my-books/${email}`, {
+    fetch(`https://book-shelf-server-phi.vercel.app/my-books/${email}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -52,7 +52,7 @@ const MyBooks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/books/${id}`, {
+        fetch(`https://book-shelf-server-phi.vercel.app/books/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -74,7 +74,7 @@ const MyBooks = () => {
     });
   };
   return (
-    <div className="p-4">
+    <div className="p-4 mt-16">
       <h2 className="text-xl font-semibold mb-4 w-11/12 mx-auto">My Books</h2>
       {listingLoading && <Loading />}
       {loading ? (
@@ -91,10 +91,10 @@ const MyBooks = () => {
             {/* head */}
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Title</th>
-                <th>Availability</th>
-                <th>Book Page</th>
+                <th className="dark:text-white">No.</th>
+                <th className="dark:text-white">Title</th>
+                <th className="dark:text-white">Availability</th>
+                <th className="dark:text-white">Book Page</th>
                 <th></th>
               </tr>
             </thead>

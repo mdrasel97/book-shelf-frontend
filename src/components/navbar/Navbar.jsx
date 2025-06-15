@@ -46,7 +46,7 @@ const Navbar = () => {
       });
   };
   return (
-    <nav className="fixed top-0 w-full bg-white dark:bg-black shadow z-50 lg:container mx-auto">
+    <nav className="fixed dark:bg-black top-0 w-full shadow z-50 lg:container mx-auto">
       <div className="navbar shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -72,6 +72,20 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {links}
+              {user ? (
+                <button onClick={handleSignOut} className="btn">
+                  Log Out
+                </button>
+              ) : (
+                <>
+                  <Link to={"/signIn"} className="btn border border-primary">
+                    Sign In
+                  </Link>
+                  <Link to={"/signUp"} className="btn btn-primary">
+                    Sign Up
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
           <div className="flex justify-center items-center gap-2">
@@ -80,7 +94,7 @@ const Navbar = () => {
               <BookOpen className="h-8 w-8 text-blue-400" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold">
+              <h2 className="text-md md:text-2xl font-bold">
                 <Typewriter
                   words={["Book Shelf", "Virtual Bookshelf"]}
                   loop={0}
@@ -100,18 +114,18 @@ const Navbar = () => {
         <div className="navbar-end space-x-3">
           <ModeToggle />
           {user ? (
-            <button onClick={handleSignOut} className="btn">
+            <button onClick={handleSignOut} className="btn hidden md:flex">
               Log Out
             </button>
           ) : (
-            <>
+            <div className="hidden md:flex gap-3">
               <Link to={"/signIn"} className="btn border border-primary">
                 Sign In
               </Link>
               <Link to={"/signUp"} className="btn btn-primary">
                 Sign Up
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

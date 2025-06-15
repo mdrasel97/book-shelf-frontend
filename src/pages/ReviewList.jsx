@@ -9,7 +9,7 @@ const ReviewList = ({ bookId }) => {
 
   useEffect(() => {
     if (bookId) {
-      fetch(`http://localhost:3000/reviews/${bookId}`)
+      fetch(`https://book-shelf-server-phi.vercel.app/reviews/${bookId}`)
         .then((res) => res.json())
         .then((data) => {
           setReviews(data);
@@ -35,7 +35,7 @@ const ReviewList = ({ bookId }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/reviews/${id}`, {
+        fetch(`https://book-shelf-server-phi.vercel.app/reviews/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

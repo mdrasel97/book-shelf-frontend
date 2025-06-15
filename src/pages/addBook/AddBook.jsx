@@ -7,6 +7,8 @@ const AddBook = () => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const token = user.accessToken;
   const handleAddBook = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -25,10 +27,11 @@ const AddBook = () => {
     };
 
     // mongodb add book
-    fetch("http://localhost:3000/books", {
+    fetch("https://book-shelf-server-phi.vercel.app/books", {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(userProfile),
     })
@@ -47,7 +50,7 @@ const AddBook = () => {
       });
   };
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center">
+    <div className="min-h-screen p-6 flex items-center justify-center mt-16">
       <div className="max-w-4xl w-full border border-blue-500 rounded-2xl shadow-lg p-6 space-y-4">
         <h2 className="text-2xl font-bold text-yellow-400 text-center">
           Add a Book

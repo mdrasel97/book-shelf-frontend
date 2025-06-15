@@ -18,16 +18,20 @@ const UpdateBooks = () => {
     reading_status,
   } = useLoaderData();
 
+  const token = user.accessToken;
+  // console.log(token);
+
   const handleUpdateBook = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
     const { ...restUpdate } = Object.fromEntries(formData.entries());
     // console.log(restUpdate);
-    fetch(`http://localhost:3000/books/${_id}`, {
+    fetch(`https://book-shelf-server-phi.vercel.app/books/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(restUpdate),
     })
@@ -51,7 +55,7 @@ const UpdateBooks = () => {
       });
   };
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center">
+    <div className="min-h-screen p-6 flex items-center justify-center mt-18">
       <div className="max-w-4xl w-full border border-blue-500 rounded-2xl shadow-lg p-6 space-y-4">
         <h2 className="text-2xl font-bold text-yellow-400 text-center">
           Update a Book

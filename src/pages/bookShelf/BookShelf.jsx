@@ -38,7 +38,7 @@ const BookShelf = () => {
           placeholder="Search by title or author"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="border rounded px-3 py-2 flex-grow"
+          className="border border-blue-500 rounded px-3 py-2 flex-grow"
         />
 
         {/* Reading Status Dropdown */}

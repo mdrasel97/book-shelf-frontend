@@ -42,7 +42,7 @@ const BookClub = () => {
           {/* Left side - Book club info */}
           <div className="animate-fade-in">
             <div className="border border-blue-500 rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <h3 className="text-2xl font-bold mb-6">
                 Why Join Our Community?
               </h3>
 
@@ -52,10 +52,10 @@ const BookClub = () => {
                     <Users className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
+                    <h4 className="font-semibold  mb-1">
                       Connect with Readers
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="">
                       Meet like-minded book enthusiasts and build lasting
                       friendships
                     </p>
@@ -67,10 +67,8 @@ const BookClub = () => {
                     <MessageCircle className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      Engaging Discussions
-                    </h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-semibold mb-1">Engaging Discussions</h4>
+                    <p className="">
                       Share insights, ask questions, and dive deep into your
                       favorite books
                     </p>
@@ -82,10 +80,8 @@ const BookClub = () => {
                     <Calendar className="h-6 w-6 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">
-                      Regular Events
-                    </h4>
-                    <p className="text-gray-600">
+                    <h4 className="font-semibold  mb-1">Regular Events</h4>
+                    <p className="">
                       Participate in book discussions, author sessions, and
                       reading challenges
                     </p>
@@ -93,7 +89,7 @@ const BookClub = () => {
                 </div>
               </div>
 
-              <Button className="w-full mt-8 bg-purple-600 hover:bg-purple-700">
+              <Button className="w-full mt-8 bg-purple-600 hover:bg-purple-700 text-white">
                 Join Our Community
               </Button>
             </div>
@@ -101,31 +97,27 @@ const BookClub = () => {
 
           {/* Right side - Upcoming events */}
           <div className="animate-fade-in">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
-              Upcoming Events
-            </h3>
+            <h3 className="text-2xl font-bold mb-6">Upcoming Events</h3>
 
             <div className="space-y-4">
               {upcomingEvents.map((event, index) => (
                 <div
                   key={event.id}
-                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
+                  className=" border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <h4 className="font-semibold text-gray-900">
-                      {event.title}
-                    </h4>
-                    <div className="flex items-center text-sm text-gray-500">
+                    <h4 className="font-semibold">{event.title}</h4>
+                    <div className="flex items-center text-sm">
                       <Users className="h-4 w-4 mr-1" />
                       {event.participants}
                     </div>
                   </div>
 
-                  <p className="text-gray-600 mb-3">{event.book}</p>
+                  <p className=" mb-3">{event.book}</p>
 
                   <div className="flex items-center justify-between">
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm">
                       {event.date} • {event.time}
                     </div>
                     <Button variant="outline" size="sm">
