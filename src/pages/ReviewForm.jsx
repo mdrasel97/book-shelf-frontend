@@ -85,7 +85,7 @@ const ReviewForm = ({ bookId, reviews, setReviews }) => {
         <select
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          className="border rounded p-2"
+          className="border rounded p-2 bg-background text-foreground"
         >
           {[1, 2, 3, 4, 5].map((r) => (
             <option key={r} value={r}>

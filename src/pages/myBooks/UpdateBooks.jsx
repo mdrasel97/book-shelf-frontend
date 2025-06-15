@@ -126,7 +126,7 @@ const UpdateBooks = () => {
               <select
                 id="book_category"
                 name="book_category"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-blue-500 bg-background text-foreground"
                 defaultValue={book_category}
                 required
               >
@@ -145,7 +145,7 @@ const UpdateBooks = () => {
               <select
                 id="reading_status"
                 name="reading_status"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-blue-500 bg-background text-foreground"
                 defaultValue={reading_status}
                 required
               >

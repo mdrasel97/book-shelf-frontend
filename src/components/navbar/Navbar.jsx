@@ -17,18 +17,21 @@ const Navbar = () => {
         <NavLink to={"/"}>Home</NavLink>
       </li>
       <li>
-        <NavLink to={"bookShelf"}>Book shelf </NavLink>
+        <NavLink to={"/bookShelf"}>Book shelf </NavLink>
+      </li>
+      <li>
+        <NavLink to={"/about"}>About </NavLink>
       </li>
       {user && (
         <>
           <li>
-            <NavLink to={"addBook"}>Add Book </NavLink>
+            <NavLink to={"/addBook"}>Add Book </NavLink>
           </li>
           <li>
-            <NavLink to={"myBooks"}>My Books </NavLink>
+            <NavLink to={"/myBooks"}>My Books </NavLink>
           </li>
           <li>
-            <NavLink to={"profile"}>Profile </NavLink>
+            <NavLink to={"/profile"}>Profile </NavLink>
           </li>
         </>
       )}
@@ -46,7 +49,7 @@ const Navbar = () => {
       });
   };
   return (
-    <nav className="fixed dark:bg-black top-0 w-full shadow z-50 lg:container mx-auto">
+    <nav className="fixed dark:bg-black border border-blue-500 top-0 w-full shadow z-50 lg:container mx-auto">
       <div className="navbar shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">

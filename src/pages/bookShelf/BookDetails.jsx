@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
-import ReviewForm from "../ReviewForm";
-import ReviewList from "../ReviewList";
-import ReadingTracker from "../../components/ReadingTracker";
 import ReviewSection from "../../components/ReviewSection";
+import ReadingTracker from "../../components/ReadingTracker";
 
 const BookDetails = () => {
   const { user } = useContext(AuthContext);
@@ -20,10 +18,19 @@ const BookDetails = () => {
     reading_status,
     user_email,
   } = useLoaderData();
-  //   console.log(data);
 
   const [upvote, setUpvote] = useState(0);
-  // handleUpvote
+  const [status, setStatus] = useState(reading_status); // 🔄 For dynamic update after status change
+
+  // 📌 Fetch upvote count
+  useEffect(() => {
+    fetch(`https://book-shelf-server-phi.vercel.app/books/${_id}`)
+      .then((res) => res.json())
+      .then((data) => setUpvote(data.upvoteCount))
+      .catch((err) => toast.error("Error fetching upvote:", err.message));
+  }, [_id]);
+
+  // 🔼 Handle Upvote
   const handleUpvote = async () => {
     try {
       const res = await fetch(
@@ -37,6 +44,7 @@ const BookDetails = () => {
 
       if (res.ok) {
         setUpvote(result.upvote);
+        toast.success("You upvoted this book!");
       } else {
         toast.error(result.error || "Failed to upvote");
       }
@@ -45,16 +53,9 @@ const BookDetails = () => {
     }
   };
 
-  useEffect(() => {
-    fetch(`https://book-shelf-server-phi.vercel.app/books/${_id}`)
-      .then((res) => res.json())
-      .then((data) => setUpvote(data.upvoteCount))
-      .catch((err) => toast.error("Error fetching upvote:", err));
-  }, [_id]);
-
   return (
     <>
-      <div className="max-w-4xl mx-auto p-6 border border-blue-500 rounded-2xl shadow-lg mt-20 mb-5">
+      <div className="max-w-4xl mx-auto p-6 rounded-2xl border border-blue-500 shadow-lg mt-16 pt-5 mb-5">
         <div className="flex flex-col md:flex-row items-start gap-6">
           <div>
             <img
@@ -62,14 +63,15 @@ const BookDetails = () => {
               alt={book_title}
               className="w-full md:w-64 rounded-xl shadow-md"
             />
-            {/* Like Count Display */}
-            <h2 className="text-xl font-semibold mb-4">
-              {upvote} interested in people
+            {/* 👍 Like Count Display */}
+            <h2 className="text-xl font-semibold mt-4">
+              {upvote} people are interested
             </h2>
           </div>
+
           <div className="flex-1">
             <h2 className="text-3xl font-bold mb-2">{book_title}</h2>
-            <p className="text-lg  mb-2">
+            <p className="text-lg mb-2">
               <span className="font-semibold">Author:</span> {book_author}
             </p>
             <p className="mb-2">
@@ -78,47 +80,50 @@ const BookDetails = () => {
             <p className="mb-2">
               <span className="font-semibold">Category:</span> {book_category}
             </p>
-            <p className="mb-2">
-              <span className="font-semibold">Reading Status:</span>{" "}
-              {reading_status}
-            </p>
-            <div className="mt-4">
-              <h3 className="text-xl font-semibold mb-1">Overview:</h3>
-              <p className="">{book_overview}</p>
-            </div>
-            <div className="mt-6 border-t border-gray-700 pt-4">
-              <h4 className="text-lg font-semibold">Reader Info:</h4>
-              <p className="">Name: {user?.displayName}</p>
-              <p className="">Email: {user?.email}</p>
-            </div>
-            <div className="mt-6">
+
+            {/* 🔄 Reading Status */}
+            <div className="mb-2">
               <ReadingTracker
                 bookId={_id}
-                initialStatus={reading_status}
-                userEmail={user?.email}
+                initialStatus={status}
                 ownerEmail={user_email}
+                onStatusChange={(newStatus) => setStatus(newStatus)}
               />
+            </div>
 
+            {/* 📖 Overview */}
+            <div className="mt-4">
+              <h3 className="text-xl font-semibold mb-1">Overview:</h3>
+              <p>{book_overview}</p>
+            </div>
+
+            {/* 👤 User Info */}
+            <div className="mt-6 border-t border-gray-300 pt-4">
+              <h4 className="text-lg font-semibold">Reader Info:</h4>
+              <p>Name: {user?.displayName}</p>
+              <p>Email: {user?.email}</p>
+            </div>
+
+            {/* 👍 Upvote Button */}
+            <div className="mt-6">
               <button
                 onClick={handleUpvote}
-                //   disabled={isUpvoting}
+                disabled={user?.email === user_email}
                 className={`px-4 py-2 rounded text-white ${
                   user?.email === user_email
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-primary hover:bg-red-500 cursor-pointer"
+                    : "bg-primary hover:bg-red-500"
                 }`}
-                disabled={user?.email === user_email}
               >
                 👍 Upvote
-                {/* ({currentUpvotes}) */}
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto p-6 border border-blue-500 rounded-2xl shadow-lg mt-5 mb-5">
-        {/* ✅ Review Section */}
+      {/* ✍️ Review Section */}
+      <div className="max-w-4xl mx-auto p-6 border border-blue-500 rounded-2xl shadow-lg mt-5 mb-10">
         <ReviewSection bookId={_id} />
       </div>
     </>

@@ -1,59 +1,78 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthContext";
 
-const readingSteps = ["Want-to-Read", "Reading", "Read"];
-
-const ReadingTracker = ({ bookId, initialStatus, userEmail, ownerEmail }) => {
+const ReadingTracker = ({
+  bookId,
+  initialStatus,
+  ownerEmail,
+  onStatusChange,
+}) => {
+  const { user } = useContext(AuthContext);
+  const userEmail = user?.email;
   const [status, setStatus] = useState(initialStatus);
+  const isOwner = userEmail === ownerEmail;
 
-  const currentIndex = readingSteps.indexOf(status);
-  const nextStatus = readingSteps[currentIndex + 1];
+  const handleStatusChange = async () => {
+    if (!isOwner) return;
 
-  const handleStatusUpdate = async () => {
-    if (!nextStatus) return;
-
-    const prevStatus = status;
-    setStatus(nextStatus); // Optimistic update
+    let nextStatus;
+    if (status === "Want-to-Read") nextStatus = "Reading";
+    else if (status === "Reading") nextStatus = "Read";
+    else return;
 
     try {
-      const res = await fetch(
-        `https://book-shelf-server-phi.vercel.app/books/${bookId}/status`,
+      const token = await user.getIdToken();
+      const response = await fetch(
+        `https://book-shelf-server-phi.vercel.app/books/${bookId}/reading-status`,
         {
           method: "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            newStatus: nextStatus,
-            userEmail,
-          }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ currentStatus: status }),
         }
       );
 
-      const result = await res.json();
-      if (!res.ok) {
-        setStatus(prevStatus); // rollback on failure
-        toast.error(result.error || "Status update failed");
-      } else {
+      const data = await response.json();
+
+      if (response.ok && data.updatedStatus) {
+        setStatus(data.updatedStatus);
+        onStatusChange && onStatusChange(data.updatedStatus); // Optional callback
         toast.success("Reading status updated!");
+      } else {
+        toast.error(data.error || "Failed to update status");
       }
-    } catch (error) {
-      setStatus(prevStatus);
-      toast.error(error);
+    } catch (err) {
+      toast.error("Something went wrong while updating status");
+      console.error(err);
     }
   };
 
   return (
-    <div className="mt-4">
-      <p className="mb-2">
+    <div>
+      <p className="text-sm">
         <span className="font-semibold">Reading Status:</span>{" "}
-        <span className="text-blue-600">{status}</span>
+        <span
+          className={`font-bold ${
+            status === "Want-to-Read"
+              ? "text-yellow-600"
+              : status === "Reading"
+              ? "text-blue-600"
+              : "text-green-600"
+          }`}
+        >
+          {status}
+        </span>
       </p>
 
-      {userEmail === ownerEmail && nextStatus && (
+      {isOwner && status !== "Read" && (
         <button
-          onClick={handleStatusUpdate}
-          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+          onClick={handleStatusChange}
+          className="mt-2 px-4 py-1 text-sm bg-indigo-600 hover:bg-indigo-700 text-white rounded"
         >
-          Mark as: {nextStatus}
+          Mark as {status === "Want-to-Read" ? "Reading" : "Read"}
         </button>
       )}
     </div>

@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signOut,
   updateProfile,
+  signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import { toast } from "react-toastify";

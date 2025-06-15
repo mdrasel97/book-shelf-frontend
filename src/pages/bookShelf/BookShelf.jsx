@@ -45,7 +45,7 @@ const BookShelf = () => {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border rounded px-3 py-2"
+          className="border rounded px-3 py-2 bg-background text-foreground"
         >
           <option value="">All statuses</option>
           <option value="Read">Read</option>

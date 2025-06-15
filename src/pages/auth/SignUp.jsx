@@ -144,7 +144,7 @@ const SignUp = () => {
       });
   };
   return (
-    <div className="w-full max-w-md p-8 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-20">
+    <div className="w-full max-w-md p-8 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-16 py-10">
       <h1 className="text-2xl font-bold text-center">Create an Account</h1>
       <form onSubmit={handleSignUp} className="space-y-6">
         <div className="space-y-1 text-sm">
