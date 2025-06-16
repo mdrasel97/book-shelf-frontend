@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import ReviewSection from "../../components/ReviewSection";
@@ -7,6 +7,7 @@ import ReadingTracker from "../../components/ReadingTracker";
 
 const BookDetails = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     _id,
     book_title,
@@ -31,15 +32,55 @@ const BookDetails = () => {
   }, [_id]);
 
   // 🔼 Handle Upvote
+  // const handleUpvote = async () => {
+  //   const userEmail = user?.email;
+
+  //   if (!userEmail) {
+  //     toast.error("Please login to upvote.");
+  //     return;
+  //   }
+  //   try {
+  //     const res = await fetch(
+  //       `https://book-shelf-server-phi.vercel.app/books/${_id}/upvote`,
+  //       {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //       }
+  //     );
+  //     const result = await res.json();
+
+  //     if (res.ok) {
+  //       setUpvote(result.upvote);
+  //       toast.success("You upvoted this book!");
+  //     } else {
+  //       toast.error(result.error || "Failed to upvote");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Error: " + error.message);
+  //   }
+  // };
+
   const handleUpvote = async () => {
+    const userEmail = user?.email;
+
+    if (!userEmail) {
+      toast.error("Please login to upvote.");
+      navigate("/signIn");
+      return;
+    }
+
     try {
       const res = await fetch(
         `https://book-shelf-server-phi.vercel.app/books/${_id}/upvote`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: userEmail }),
         }
       );
+
       const result = await res.json();
 
       if (res.ok) {

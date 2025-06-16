@@ -49,7 +49,7 @@ const Navbar = () => {
       });
   };
   return (
-    <nav className="fixed dark:bg-black border top-0 w-full shadow z-50 md:container mx-auto">
+    <nav className="fixed dark:bg-black bg-white border top-0 w-full shadow z-50 md:container mx-auto">
       <div className="navbar shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">

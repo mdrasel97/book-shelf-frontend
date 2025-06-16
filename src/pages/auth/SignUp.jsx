@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
@@ -8,7 +8,7 @@ import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser, googleLogIn } = useContext(AuthContext);
-  // const [passwordError, setPasswordError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   // const handleSignUp = (e) => {
@@ -78,6 +78,19 @@ const SignUp = () => {
     const { email, password, name, photo } = Object.fromEntries(
       formData.entries()
     );
+    // Password validation
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setPasswordError("Password must contain at least one uppercase letter");
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setPasswordError("Password must contain at least one lowercase letter");
+      return;
+    }
 
     createUser(email, password)
       .then((result) => {
@@ -196,9 +209,9 @@ const SignUp = () => {
             className="w-full px-4 py-3 rounded-md border focus:border-primary border-primary"
           />
         </div>
-        {/* {passwordError && (
+        {passwordError && (
           <div className="text-red-500 text-sm">{passwordError}</div>
-        )} */}
+        )}
 
         <div className="text-xs">
           Password must contain at least 6 characters, including one uppercase

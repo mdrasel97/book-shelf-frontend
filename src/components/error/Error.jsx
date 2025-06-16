@@ -26,7 +26,7 @@ const Error = () => {
 
       <Link
         to={"/"}
-        className="mt-6 px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all duration-300"
+        className="mt-6 px-6 py-2 bg-primary hover:bg-green-700 text-white rounded-xl transition-all duration-300"
       >
         🔙 Return to homepage
       </Link>

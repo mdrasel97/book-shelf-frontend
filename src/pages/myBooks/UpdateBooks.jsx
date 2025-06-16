@@ -55,9 +55,9 @@ const UpdateBooks = () => {
       });
   };
   return (
-    <div className="min-h-screen p-6 flex items-center justify-center mt-18">
-      <div className="max-w-4xl w-full border border-blue-500 rounded-2xl shadow-lg p-6 space-y-4">
-        <h2 className="text-2xl font-bold text-yellow-400 text-center">
+    <div className="min-h-screen p-6 flex items-center justify-center mt-16">
+      <div className="max-w-4xl w-full border border-primary rounded-2xl shadow-lg p-6 space-y-4">
+        <h2 className="text-2xl font-bold text-primary text-center">
           Update a Book
         </h2>
         <form onSubmit={handleUpdateBook} className="">
@@ -70,7 +70,7 @@ const UpdateBooks = () => {
                 type="text"
                 id="book_title"
                 name="book_title"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={book_title}
                 required
               />
@@ -84,7 +84,7 @@ const UpdateBooks = () => {
                 type="text"
                 id="cover_photo"
                 name="cover_photo"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={cover_photo}
                 required
               />
@@ -98,7 +98,7 @@ const UpdateBooks = () => {
                 type="number"
                 id="total_page"
                 name="total_page"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={total_page}
                 required
               />
@@ -112,7 +112,7 @@ const UpdateBooks = () => {
                 type="text"
                 id="book_author"
                 name="book_author"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={book_author}
                 required
               />
@@ -126,7 +126,7 @@ const UpdateBooks = () => {
               <select
                 id="book_category"
                 name="book_category"
-                className="p-3 rounded border border-blue-500 bg-background text-foreground"
+                className="p-3 rounded border border-primary bg-background text-foreground"
                 defaultValue={book_category}
                 required
               >
@@ -145,7 +145,7 @@ const UpdateBooks = () => {
               <select
                 id="reading_status"
                 name="reading_status"
-                className="p-3 rounded border border-blue-500 bg-background text-foreground"
+                className="p-3 rounded border border-primary bg-background text-foreground"
                 defaultValue={reading_status}
                 required
               >
@@ -165,7 +165,7 @@ const UpdateBooks = () => {
                 type="email"
                 id="user_email"
                 name="user_email"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={user?.email}
                 readOnly
               />
@@ -180,7 +180,7 @@ const UpdateBooks = () => {
                 type="text"
                 id="user_name"
                 name="user_name"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={user?.displayName}
                 readOnly
               />
@@ -195,7 +195,7 @@ const UpdateBooks = () => {
               id="book_overview"
               name="book_overview"
               rows="4"
-              className="p-3 rounded border border-blue-500"
+              className="p-3 rounded border border-primary"
               defaultValue={book_overview}
               required
             ></textarea>
@@ -203,7 +203,7 @@ const UpdateBooks = () => {
 
           <button
             type="submit"
-            className="w-full bg-yellow-500 text-black py-2 rounded font-semibold hover:bg-yellow-400"
+            className="w-full bg-primary text-white py-2 rounded font-semibold hover:bg-green-700"
           >
             Update Book
           </button>

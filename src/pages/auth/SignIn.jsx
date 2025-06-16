@@ -5,7 +5,6 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { Button } from "../../components/ui/button";
 
 const SignIn = () => {
   const { signInUser, googleLogIn, setLoading } = useContext(AuthContext);
@@ -54,7 +53,7 @@ const SignIn = () => {
         } else if (errorCode === "auth/wrong-password") {
           toast.error("Incorrect password. Please try again.");
         } else {
-          toast.error(error.message);
+          toast.error(error?.message);
         }
       });
   };
