@@ -51,8 +51,8 @@ const AddBook = () => {
   };
   return (
     <div className="min-h-screen p-6 flex items-center justify-center mt-16">
-      <div className="max-w-4xl w-full border border-blue-500 rounded-2xl shadow-lg p-6 space-y-4">
-        <h2 className="text-2xl font-bold text-yellow-400 text-center">
+      <div className="max-w-4xl w-full border border-primary rounded-2xl shadow-lg p-6 space-y-4">
+        <h2 className="text-2xl font-bold text-primary text-center">
           Add a Book
         </h2>
         <form onSubmit={handleAddBook} className="">
@@ -67,7 +67,7 @@ const AddBook = () => {
                 name="book_title"
                 //   value={book.book_title}
                 //   onChange={handleChange}
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 required
               />
             </div>
@@ -82,7 +82,7 @@ const AddBook = () => {
                 name="cover_photo"
                 //   value={book.cover_photo}
                 //   onChange={handleChange}
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 required
               />
             </div>
@@ -95,7 +95,7 @@ const AddBook = () => {
                 type="number"
                 id="total_page"
                 name="total_page"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 required
               />
             </div>
@@ -108,7 +108,7 @@ const AddBook = () => {
                 type="text"
                 id="book_author"
                 name="book_author"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 required
               />
             </div>
@@ -121,7 +121,7 @@ const AddBook = () => {
               <select
                 id="book_category"
                 name="book_category"
-                className="p-3 rounded border border-blue-500 bg-background text-foreground"
+                className="p-3 rounded border border-primary bg-background text-foreground"
                 required
               >
                 <option value="">Select Book Category</option>
@@ -139,7 +139,7 @@ const AddBook = () => {
               <select
                 id="reading_status"
                 name="reading_status"
-                className="p-3 rounded border border-blue-500 bg-background text-foreground"
+                className="p-3 rounded border border-primary bg-background text-foreground"
                 required
               >
                 <option value="">Select Reading Status</option>
@@ -158,7 +158,7 @@ const AddBook = () => {
                 type="email"
                 id="user_email"
                 name="user_email"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={user?.email}
                 readOnly
               />
@@ -173,7 +173,7 @@ const AddBook = () => {
                 type="text"
                 id="user_name"
                 name="user_name"
-                className="p-3 rounded border border-blue-500"
+                className="p-3 rounded border border-primary"
                 defaultValue={user?.displayName}
                 readOnly
               />
@@ -190,14 +190,14 @@ const AddBook = () => {
               // value={book.book_overview}
               // onChange={handleChange}
               rows="4"
-              className="p-3 rounded border border-blue-500"
+              className="p-3 rounded border border-primary"
               required
             ></textarea>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-yellow-500 text-black py-2 rounded font-semibold hover:bg-yellow-400"
+            className="w-full bg-primary text-white py-2 rounded font-semibold hover:bg-green-700"
           >
             Submit Book
           </button>

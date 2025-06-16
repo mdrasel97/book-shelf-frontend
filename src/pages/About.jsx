@@ -22,7 +22,7 @@ const About = () => {
       variants={container}
     >
       <motion.h1
-        className="text-4xl font-bold mb-6 text-center text-indigo-600"
+        className="text-4xl font-bold mb-6 text-center text-primary"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -44,10 +44,10 @@ const About = () => {
         variants={container}
       >
         <motion.div
-          className="border border-blue-500 p-6 rounded-2xl shadow-md"
+          className="border border-primary p-6 rounded-2xl shadow-md"
           whileHover={{ scale: 1.03 }}
         >
-          <h2 className="text-xl font-semibold mb-2 text-indigo-500">
+          <h2 className="text-xl font-semibold mb-2 text-primary">
             📖 Book Management
           </h2>
           <p className="">
@@ -57,10 +57,10 @@ const About = () => {
         </motion.div>
 
         <motion.div
-          className="border border-blue-500 p-6 rounded-2xl shadow-md"
+          className="border border-primary p-6 rounded-2xl shadow-md"
           whileHover={{ scale: 1.03 }}
         >
-          <h2 className="text-xl font-semibold mb-2 text-indigo-500">
+          <h2 className="text-xl font-semibold mb-2 text-primary">
             🌟 Reviews and ratings
           </h2>
           <p className="">

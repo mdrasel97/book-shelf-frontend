@@ -6,6 +6,9 @@ import { RouterProvider } from "react-router";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import AuthProvider from "./context/AuthProvider.jsx";
 import { ToastContainer } from "react-toastify";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

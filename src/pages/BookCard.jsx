@@ -40,7 +40,7 @@ const BookCard = ({ book }) => {
     }
   };
   return (
-    <div className="rounded-xl border border-blue-600 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="rounded-xl border border-primary shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative">
         <img
           src={cover_photo}
@@ -76,7 +76,7 @@ const BookCard = ({ book }) => {
 
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <button className="flex items-center space-x-1 text-blue-600 hover:text-blue-700 transition-colors">
+            <button className="flex items-center space-x-1 text-primary hover:text-green-700 transition-colors">
               <ArrowUp className="h-4 w-4" />
               <span className="text-sm font-medium">{upvoteCount}</span>
             </button>
@@ -84,7 +84,7 @@ const BookCard = ({ book }) => {
 
           <Link
             to={`/bookDetails/${_id}`}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            className="bg-primary hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
           >
             View Details
           </Link>

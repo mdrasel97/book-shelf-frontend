@@ -145,6 +145,7 @@ const SignUp = () => {
   };
   return (
     <div className="w-full max-w-md p-8 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-16 py-10">
+      <title>Register page</title>
       <h1 className="text-2xl font-bold text-center">Create an Account</h1>
       <form onSubmit={handleSignUp} className="space-y-6">
         <div className="space-y-1 text-sm">
@@ -155,8 +156,8 @@ const SignUp = () => {
             type="text"
             name="name"
             id="name"
-            placeholder="name"
-            className="w-full px-4 py-3 rounded-md border focus:border-primary"
+            placeholder="Name"
+            className="w-full px-4 py-3 rounded-md border focus:border-primary border-primary"
           />
         </div>
         <div className="space-y-1 text-sm">
@@ -168,7 +169,7 @@ const SignUp = () => {
             name="email"
             id="email"
             placeholder="jon@duo.com"
-            className="w-full px-4 py-3 rounded-md border focus:border-primary"
+            className="w-full px-4 py-3 rounded-md border focus:border-primary border-primary"
           />
         </div>
         <div className="space-y-1 text-sm">
@@ -180,7 +181,7 @@ const SignUp = () => {
             name="photo"
             id="photo"
             placeholder="Photo URL"
-            className="w-full px-4 py-3 rounded-md border focus:border-primary"
+            className="w-full px-4 py-3 rounded-md border focus:border-primary border-primary"
           />
         </div>
         <div className="space-y-1 text-sm">
@@ -192,14 +193,14 @@ const SignUp = () => {
             name="password"
             id="password"
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-md border focus:border-primary"
+            className="w-full px-4 py-3 rounded-md border focus:border-primary border-primary"
           />
         </div>
         {/* {passwordError && (
           <div className="text-red-500 text-sm">{passwordError}</div>
         )} */}
 
-        <div className="text-xs text-gray-600">
+        <div className="text-xs">
           Password must contain at least 6 characters, including one uppercase
           and one lowercase letter and one number.
         </div>
@@ -209,9 +210,7 @@ const SignUp = () => {
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-        <p className="px-3 text-sm dark:text-gray-600">
-          Login with social accounts
-        </p>
+        <p className="px-3 text-sm">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
       </div>
       <div className="">

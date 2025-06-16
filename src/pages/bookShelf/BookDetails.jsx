@@ -55,7 +55,7 @@ const BookDetails = () => {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto p-6 rounded-2xl border border-blue-500 shadow-lg mt-16 pt-5 mb-5">
+      <div className="max-w-4xl mx-auto p-6 rounded-2xl border border-primary shadow-lg mt-16 pt-5 mb-5">
         <div className="flex flex-col md:flex-row items-start gap-6">
           <div>
             <img
@@ -112,7 +112,7 @@ const BookDetails = () => {
                 className={`px-4 py-2 rounded text-white ${
                   user?.email === user_email
                     ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-primary hover:bg-red-500"
+                    : "bg-primary hover:bg-primary"
                 }`}
               >
                 👍 Upvote
@@ -123,7 +123,7 @@ const BookDetails = () => {
       </div>
 
       {/* ✍️ Review Section */}
-      <div className="max-w-4xl mx-auto p-6 border border-blue-500 rounded-2xl shadow-lg mt-5 mb-10">
+      <div className="max-w-4xl mx-auto p-6 border border-primary rounded-2xl shadow-lg mt-5 mb-10">
         <ReviewSection bookId={_id} />
       </div>
     </>

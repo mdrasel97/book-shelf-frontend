@@ -49,7 +49,7 @@ const Navbar = () => {
       });
   };
   return (
-    <nav className="fixed dark:bg-black border border-blue-500 top-0 w-full shadow z-50 lg:container mx-auto">
+    <nav className="fixed dark:bg-black border top-0 w-full shadow z-50 md:container mx-auto">
       <div className="navbar shadow-sm">
         <div className="navbar-start">
           <div className="dropdown">
@@ -72,7 +72,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow bg-background text-foreground space-y-3"
             >
               {links}
               {user ? (
@@ -94,7 +94,7 @@ const Navbar = () => {
           <div className="flex justify-center items-center gap-2">
             {/* <img className="w-10" src={logoImg} alt="" /> */}
             <div>
-              <BookOpen className="h-8 w-8 text-blue-400" />
+              <BookOpen className="h-8 w-8 text-primary" />
             </div>
             <div>
               <h2 className="text-md md:text-2xl font-bold">
@@ -125,7 +125,10 @@ const Navbar = () => {
               <Link to={"/signIn"} className="btn border border-primary">
                 Sign In
               </Link>
-              <Link to={"/signUp"} className="btn btn-primary">
+              <Link
+                to={"/signUp"}
+                className="btn bg-primary border-primary text-white"
+              >
                 Sign Up
               </Link>
             </div>

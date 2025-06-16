@@ -78,6 +78,7 @@ const SignIn = () => {
   };
   return (
     <div className="w-full max-w-md p-10 mx-auto my-5 space-y-3 rounded-xl border border-primary mt-16 ">
+      <title>Login page</title>
       <h1 className="text-2xl font-bold text-center">Welcome Back</h1>
       <form onSubmit={handleSignIn} className="space-y-6">
         <div className="space-y-1 text-sm">
@@ -89,7 +90,7 @@ const SignIn = () => {
             name="email"
             id="email"
             placeholder="jon@duo.com"
-            className="w-full px-4 py-3 rounded-md border border-blue-500 focus:border-primary"
+            className="w-full px-4 py-3 rounded-md border border-primary focus:border-primary"
           />
         </div>
         <div className="space-y-1 text-sm">
@@ -101,27 +102,25 @@ const SignIn = () => {
             name="password"
             id="password"
             placeholder="Password"
-            className="w-full px-4 py-3 rounded-md border border-blue-500"
+            className="w-full px-4 py-3 rounded-md border border-primary"
           />
-          <div className="flex justify-end text-xs mt-3 dark:text-gray-600">
+          <div className="flex justify-end text-xs mt-3">
             <a rel="noopener noreferrer" href="#">
               Forgot Password?
             </a>
           </div>
         </div>
-        <Button
+        <button
           type="submit"
-          className="block w-full bg-blue-500 text-[var(--primary)]"
+          className="block w-full p-3 text-center rounded-sm bg-primary text-white "
           variant={"outline"}
         >
           Sign in
-        </Button>
+        </button>
       </form>
       <div className="flex items-center pt-4 space-x-1">
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
-        <p className="px-3 text-sm dark:text-gray-600">
-          Login with social accounts
-        </p>
+        <p className="px-3 text-sm ">Login with social accounts</p>
         <div className="flex-1 h-px sm:w-16 dark:bg-gray-300"></div>
       </div>
       <div className="flex justify-center space-x-4">

@@ -41,7 +41,7 @@ const BookClub = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Book club info */}
           <div className="animate-fade-in">
-            <div className="border border-blue-500 rounded-2xl p-8">
+            <div className="border border-primary rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6">
                 Why Join Our Community?
               </h3>
@@ -49,7 +49,7 @@ const BookClub = () => {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="bg-purple-100 p-3 rounded-full">
-                    <Users className="h-6 w-6 text-purple-600" />
+                    <Users className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-semibold  mb-1">
@@ -64,7 +64,7 @@ const BookClub = () => {
 
                 <div className="flex items-start space-x-4">
                   <div className="bg-blue-100 p-3 rounded-full">
-                    <MessageCircle className="h-6 w-6 text-blue-600" />
+                    <MessageCircle className="h-6 w-6 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Engaging Discussions</h4>
@@ -89,7 +89,7 @@ const BookClub = () => {
                 </div>
               </div>
 
-              <Button className="w-full mt-8 bg-purple-600 hover:bg-purple-700 text-white">
+              <Button className="w-full mt-8 bg-primary hover:bg-green-700 text-white">
                 Join Our Community
               </Button>
             </div>

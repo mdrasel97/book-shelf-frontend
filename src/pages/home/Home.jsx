@@ -24,7 +24,7 @@ const Home = () => {
           ))}
         </div>
         <div className="text-center mt-12 flex items-center justify-center">
-          <button className="btn btn-primary flex ">
+          <button className="btn bg-primary text-white border-primary flex ">
             <Link to="/bookShelf">View All Books</Link>
             <FaArrowRightLong className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </button>

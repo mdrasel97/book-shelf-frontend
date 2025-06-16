@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <BookOpen className="h-8 w-8 text-blue-400" />
+              <BookOpen className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">Virtual Bookshelf</span>
             </div>
             <p className="text-slate-300 mb-4 max-w-md">
@@ -90,7 +90,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2 text-slate-300">
                 <MapPin className="h-4 w-4" />
-                <span>Global Community</span>
+                <span>Global Community, Dhaka, Bangladesh</span>
               </div>
             </div>
           </div>

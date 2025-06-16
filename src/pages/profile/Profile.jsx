@@ -3,6 +3,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { Link } from "react-router";
+import Loading from "../../components/Loading";
 
 const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#3B82F6"];
 
@@ -34,7 +35,12 @@ const Profile = () => {
     if (user?.email) fetchData();
   }, [user]);
 
-  if (loading) return <div className="text-center mt-10">Loading...</div>;
+  if (loading)
+    return (
+      <div className="text-center mt-10">
+        <Loading></Loading>
+      </div>
+    );
   if (!summary)
     return <div className="text-center mt-10 text-red-500">No data found</div>;
 
@@ -44,11 +50,11 @@ const Profile = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* User Info */}
-        <div className="border border-blue-600 rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
+        <div className="border border-primary rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
           <img
             src={user.photoURL}
             alt="Profile"
-            className="w-28 h-28 rounded-full border-4 border-indigo-500 mb-4 shadow"
+            className="w-28 h-28 rounded-full border-4 border-primary mb-4 shadow"
           />
           <h2 className="text-xl font-semibold">{user.displayName}</h2>
           <p className="">{user.email}</p>
@@ -59,11 +65,11 @@ const Profile = () => {
         </div>
 
         {/*  Bookshelf Summary */}
-        <div className="border border-blue-600 rounded-2xl shadow-lg p-6">
+        <div className="border border-primary rounded-2xl shadow-lg p-6">
           <h3 className="text-lg font-semibold mb-4">📚 Bookshelf Summary</h3>
           <p className="mb-2">
             Total Books:{" "}
-            <span className="font-bold text-indigo-600">
+            <span className="font-bold text-blue-600">
               {summary.totalBooks}
             </span>
           </p>
@@ -79,7 +85,7 @@ const Profile = () => {
       </div>
 
       {/* Pie Chart */}
-      <div className="mt-10 mb-5 border border-blue-500 rounded-2xl shadow-lg p-6">
+      <div className="mt-10 mb-5 border border-primary rounded-2xl shadow-lg p-6">
         <h3 className="text-lg font-semibold mb-4 text-center">
           📊 Category Distribution
         </h3>

@@ -75,7 +75,7 @@ const Banner = () => {
                 <Button
                   asChild
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+                  className="bg-primary hover:bg-green-700 text-white px-8 py-3"
                 >
                   <Link to="/bookshelf">
                     <BookOpen className="h-5 w-5 mr-2" />
@@ -88,7 +88,7 @@ const Banner = () => {
                   size="lg"
                   className="bg-primary px-8 py-3"
                 >
-                  <Link to="/signIn">
+                  <Link to="">
                     <User className="h-5 w-5 mr-2" />
                     Join Now
                   </Link>
