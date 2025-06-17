@@ -14,6 +14,7 @@ import UpdateBooks from "../pages/myBooks/UpdateBooks";
 import Loading from "../components/Loading";
 import EditProfile from "../pages/profile/EditProfile";
 import About from "../pages/About";
+import Contact from "../pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: "about",
         Component: About,
+      },
+      {
+        path: "contact",
+        Component: Contact,
       },
     ],
   },

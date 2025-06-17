@@ -12,7 +12,7 @@
 - 📝 **Add, Update, Delete Books** (Private access)
 - 📈 **Reading Progress Tracker**
 - 💬 **Reviews with Edit/Delete**
-- 🔼 **Upvote System** for community recommendations
+- 🔼 **UpVote System** for community recommendations
 - 🔍 **Search & Filter** by title, author, and reading status
 - 📊 **Profile Dashboard** with charts (books by category)
 - 🎨 **Responsive UI** using Tailwind CSS & Framer Motion animations
@@ -21,8 +21,7 @@
 
 ## 🌐 Live Demo
 
-- **Client**: [Netlify/Firebase/Vercel Deployment Link](#)
-- **Server**: [Render/Vercel/Heroku Deployment Link](#)
+- **Client**: [https://book-shelf-web.web.app/](#)
 
 ---
 
@@ -33,7 +32,7 @@
 | Frontend       | React, Tailwind CSS, Framer Motion |
 | Backend        | Node.js, Express.js, MongoDB       |
 | Authentication | Firebase (Email & Google)          |
-| Deployment     | Vercel/Netlify + Render            |
+| Deployment     | Firebase deploy                    |
 
 ---
 
@@ -43,7 +42,7 @@
 
 - `/` → Home (Banner, Popular Books, Categories, Extra Sections)
 - `/bookshelf` → Browse books with filters & search
-- `/books/:id` → Book details with reviews, upvotes, tracker
+- `/books/:id` → Book details with reviews, upVotes, tracker
 - `/login` → Login via Email/Google
 - `/register` → Registration
 - `/about` → About the platform
@@ -72,12 +71,13 @@
   "book_overview": "string",
   "user_email": "string (auto-filled)",
   "user_name": "string (auto-filled)",
-  "upvote": 0
+  "upVote": 0
 }
 
 
 # Clone the repo
-git clone https://github.com/yourname/virtual-bookshelf.git
+git clone https://github.com/Programming-Hero-Web-Course4/b11a11-server-side-mdrasel97/tree/main
+git clone https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-mdrasel97/tree/main
 cd virtual-bookshelf
 
 # Install client dependencies
