@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
-// import logoImg from "../../assets/logo.png";
 import { ModeToggle } from "../ui/mode-toggle";
 import { BookOpen } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
