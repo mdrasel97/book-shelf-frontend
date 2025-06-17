@@ -16,10 +16,6 @@ const AddBook = () => {
     const { ...restBookData } = Object.fromEntries(formData.entries());
     // console.log(data);
 
-    // const BooksInfo = {
-    // bookData,
-    //
-    // };
     const userProfile = {
       email: user?.email,
       name: user?.displayName,
@@ -41,7 +37,7 @@ const AddBook = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Your Book has been saved",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -51,6 +47,7 @@ const AddBook = () => {
   };
   return (
     <div className="min-h-screen p-6 flex items-center justify-center mt-16">
+      <title>Add Book || Bookshelf</title>
       <div className="max-w-4xl w-full border border-primary rounded-2xl shadow-lg p-6 space-y-4">
         <h2 className="text-2xl font-bold text-primary text-center">
           Add a Book

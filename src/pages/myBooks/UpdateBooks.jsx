@@ -42,11 +42,11 @@ const UpdateBooks = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your Listing Has Been Updated",
+          title: "Your Book Has Been Updated",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -56,6 +56,7 @@ const UpdateBooks = () => {
   };
   return (
     <div className="min-h-screen p-6 flex items-center justify-center mt-16">
+      <title>update book || bookShelf</title>
       <div className="max-w-4xl w-full border border-primary rounded-2xl shadow-lg p-6 space-y-4">
         <h2 className="text-2xl font-bold text-primary text-center">
           Update a Book

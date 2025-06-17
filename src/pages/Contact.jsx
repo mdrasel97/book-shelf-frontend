@@ -33,9 +33,10 @@ const Contact = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 mt-16">
+    <div className="min-h-screen flex items-center  justify-center px-4 mt-16">
+      <title>bookShelf || Contact</title>
       <motion.div
-        className="w-full max-w-2xl border-white p-8 rounded-2xl shadow-lg"
+        className="w-full max-w-2xl border border-white p-8 rounded-2xl shadow-lg"
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

@@ -17,23 +17,6 @@ const SignIn = () => {
     const { email, password } = Object.fromEntries(formData);
 
     // firebase Auth
-    // signInUser(email, password)
-    //   .then((result) => {
-    //     const user = result.user;
-    //     console.log(user);
-    //     Swal.fire({
-    //       position: "center",
-    //       icon: "success",
-    //       title: "Your work has been saved",
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //     });
-    //     navigate(`${location?.state ? location?.state : "/"}`);
-    //   })
-    //   .catch((error) => {
-    //     toast.error(error);
-    //   });
-
     signInUser(email, password)
       .then((result) => {
         setLoading(false);

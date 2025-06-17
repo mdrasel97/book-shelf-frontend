@@ -11,65 +11,6 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  // const handleSignUp = (e) => {
-  //   e.preventDefault();
-  //   const form = e.target;
-  //   const formData = new FormData(form);
-  //   const { email, password, ...restData } = Object.fromEntries(
-  //     formData.entries()
-  //   );
-  //   // console.log(restData);
-
-  //   // Password validation
-  //   // if (password.length < 6) {
-  //   //   setPasswordError("Password must be at least 6 characters long");
-  //   //   return;
-  //   // }
-  //   // if (!/[A-Z]/.test(password)) {
-  //   //   setPasswordError("Password must contain at least one uppercase letter");
-  //   //   return;
-  //   // }
-  //   // if (!/[a-z]/.test(password)) {
-  //   //   setPasswordError("Password must contain at least one lowercase letter");
-  //   //   return;
-  //   // }
-
-  //   createUser(email, password)
-  //     .then((result) => {
-  //       // console.log(result);
-  //       const user = result.user;
-  //       const userProfile = {
-  //         ...restData,
-  //         email,
-  //         creationTime: user?.metadata?.creationTime,
-  //         lastSignInTime: user?.metadata?.lastSignInTime,
-  //       };
-
-  //       // save to my database
-  //       fetch("https://book-shelf-server-phi.vercel.app/users", {
-  //         method: "POST",
-  //         headers: {
-  //           "content-type": "application/json",
-  //         },
-  //         body: JSON.stringify(userProfile),
-  //       })
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           console.log(data);
-  //           Swal.fire({
-  //             position: "center",
-  //             icon: "success",
-  //             title: "Your work has been saved",
-  //             showConfirmButton: false,
-  //             timer: 1500,
-  //           });
-  //         });
-  //       navigate(`${location.state ? location.state : "/"}`);
-  //     })
-  //     .catch((error) => {
-  //       toast.error(error);
-  //     });
-  // };
 
   const handleSignUp = (e) => {
     e.preventDefault();

@@ -57,7 +57,7 @@ const MyBooks = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.deletedCount) {
               const remaining = listings.filter(
                 (listing) => listing._id !== id
@@ -75,6 +75,7 @@ const MyBooks = () => {
   };
   return (
     <div className="p-4 mt-16">
+      <title>my book || bookShelf</title>
       <h2 className="text-xl font-semibold mb-4 w-11/12 mx-auto">My Books</h2>
       {listingLoading && <Loading />}
       {loading ? (

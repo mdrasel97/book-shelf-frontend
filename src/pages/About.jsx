@@ -21,6 +21,7 @@ const About = () => {
       animate="visible"
       variants={container}
     >
+      <title>bookShelf || About</title>
       <motion.h1
         className="text-4xl font-bold mb-6 text-center text-primary"
         initial={{ opacity: 0, y: -20 }}
