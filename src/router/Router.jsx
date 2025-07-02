@@ -34,6 +34,14 @@ export const router = createBrowserRouter([
         loader: () => fetch("https://book-shelf-server-phi.vercel.app/books"),
         hydrateFallbackElement: <Loading></Loading>,
       },
+      // {
+      //   path: "/category/:categoryName",
+      //   Component: CategoryBook,
+      //   loader: ({ params }) =>
+      //     fetch(
+      //       `https://book-shelf-server-phi.vercel.app/books ${params.categoryName}`
+      //     ),
+      // },
       {
         path: "bookDetails/:id",
         Component: BookDetails,

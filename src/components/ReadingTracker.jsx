@@ -45,8 +45,7 @@ const ReadingTracker = ({
         toast.error(data.error || "Failed to update status");
       }
     } catch (err) {
-      toast.error("Something went wrong while updating status");
-      console.error(err);
+      toast.error(err);
     }
   };
 

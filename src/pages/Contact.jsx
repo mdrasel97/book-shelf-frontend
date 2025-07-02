@@ -23,7 +23,7 @@ const Contact = () => {
           formRef.current.reset();
         },
         (error) => {
-          console.error("Failed to send:", error.text);
+          toast.error("Failed to send:", error.text);
         }
       );
   };

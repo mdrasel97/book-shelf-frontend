@@ -4,6 +4,7 @@ import axios from "axios";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import { Link } from "react-router";
 import Loading from "../../components/Loading";
+import { toast } from "react-toastify";
 
 const COLORS = ["#6366F1", "#10B981", "#F59E0B", "#EF4444", "#3B82F6"];
 
@@ -28,7 +29,7 @@ const Profile = () => {
         );
         setSummary(res.data);
       } catch (err) {
-        console.error("Failed to fetch summary:", err);
+        toast.error("Failed to fetch summary:", err);
       }
     };
 

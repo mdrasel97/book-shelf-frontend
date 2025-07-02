@@ -19,7 +19,7 @@ const Home = () => {
         <p className="text-center mb-5 text-sx">
           Discover what our community is reading
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-11/12 mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-11/12 mx-auto">
           {books.map((book) => (
             <BookCard key={book._id} book={book}></BookCard>
           ))}

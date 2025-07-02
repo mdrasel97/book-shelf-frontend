@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ReviewForm from "../pages/ReviewForm";
 import ReviewList from "../pages/ReviewList";
+import { toast } from "react-toastify";
 
 const ReviewSection = ({ bookId }) => {
   const [reviews, setReviews] = useState([]);
@@ -10,7 +11,7 @@ const ReviewSection = ({ bookId }) => {
       fetch(`https://book-shelf-server-phi.vercel.app/reviews/${bookId}`)
         .then((res) => res.json())
         .then((data) => setReviews(data))
-        .catch((err) => console.error("Failed to load reviews:", err));
+        .catch((err) => toast.error("Failed to load reviews:", err));
     }
   }, [bookId]);
 

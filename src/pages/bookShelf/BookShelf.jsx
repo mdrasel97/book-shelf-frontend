@@ -56,7 +56,7 @@ const BookShelf = () => {
       </div>
 
       {/* Book cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
             <BookCard key={book._id} book={book}></BookCard>

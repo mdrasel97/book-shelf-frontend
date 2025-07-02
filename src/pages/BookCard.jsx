@@ -40,12 +40,12 @@ const BookCard = ({ book }) => {
     }
   };
   return (
-    <div className="rounded-xl border border-primary shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="rounded-xl border border-primary my-5 shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative">
         <img
           src={cover_photo}
           alt={book_title}
-          className="w-full h-64 object-cover"
+          className="w-[98%] mx-auto rounded-lg h-58 object-content"
         />
         <div className="absolute top-4 right-4">
           <span

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const categoryImages = [
   { url: "https://i.ibb.co/TxvnwYqH/pexels-pixabay-237371.jpg" },
@@ -13,6 +15,7 @@ const categoryImages = [
 ];
 
 const ExploreCategory = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState({
     totalBooks: 0,
     booksByCategory: [],
@@ -26,7 +29,7 @@ const ExploreCategory = () => {
       .then((res) => {
         setCategories(res.data);
       })
-      .catch((err) => console.error("Error fetching summary:", err));
+      .catch((err) => toast.error("Error fetching summary:", err));
   }, []);
 
   const sectionVariant = {
@@ -85,71 +88,13 @@ const ExploreCategory = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
               >
-                <div className="border border-primary  rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-xl">
+                <div className="border border-primary rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-xl">
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={categoryImages[index % categoryImages.length].url}
                       alt={`Category ${index + 1}`}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-
-                    {categories.booksByCategory.map((category, index) => {
-                      const image =
-                        categoryImages[index % categoryImages.length];
-                      const IconComponent = category.icon || null;
-
-                      return (
-                        <motion.div
-                          key={category._id || index}
-                          className="group cursor-pointer"
-                          custom={index}
-                          variants={cardVariants}
-                          initial="hidden"
-                          whileInView="visible"
-                          viewport={{ once: true, amount: 0.2 }}
-                        >
-                          <div className="border border-primary rounded-2xl shadow-lg overflow-hidden transition-all duration-300 group-hover:shadow-xl">
-                            <div className="relative h-48 overflow-hidden">
-                              <img
-                                src={image.url}
-                                alt={`Category ${index + 1}`}
-                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                              />
-                              <div className="absolute inset-0 bg-black/40" />
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div
-                                  className={`${
-                                    category.color || "bg-blue-500"
-                                  } p-4 rounded-full`}
-                                >
-                                  {IconComponent && (
-                                    <IconComponent className="h-8 w-8 text-white" />
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="p-6">
-                              <h3 className="text-xl font-bold mb-2">
-                                {category.category}
-                              </h3>
-                              <p className="mb-4">
-                                {category.description ||
-                                  "Explore books in this category"}
-                              </p>
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm">
-                                  {category.count?.toLocaleString() || 0} books
-                                </span>
-                                <span className="btn bg-primary text-white border-primary transition-colors">
-                                  Explore →
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
-                      );
-                    })}
 
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -169,16 +114,29 @@ const ExploreCategory = () => {
                     <h3 className="text-xl font-bold mb-2">
                       {category.category}
                     </h3>
-                    <p className=" mb-4">
+                    <p className="mb-4">
                       {category.description || "Explore books in this category"}
                     </p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm">
                         {category.count?.toLocaleString() || 0} books
                       </span>
-                      <span className="btn bg-primary text-white border-primary transition-colors">
+                      {/* <button
+                        onClick={() =>
+                          (window.location.href = `/category/${category.category}`)
+                        }
+                        className="btn bg-primary text-white border-primary transition-colors"
+                      >
                         Explore →
-                      </span>
+                      </button> */}
+                      <button
+                        onClick={() =>
+                          navigate(`/category/${category.book_category}`)
+                        }
+                        className="btn bg-primary text-white border-primary transition-colors"
+                      >
+                        Explore →
+                      </button>
                     </div>
                   </div>
                 </div>

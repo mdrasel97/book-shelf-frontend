@@ -5,9 +5,19 @@ import { BookOpen } from "lucide-react";
 import { AuthContext } from "../../context/AuthContext";
 import { toast } from "react-toastify";
 import { Typewriter } from "react-simple-typewriter";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const links = (
     <>
@@ -31,9 +41,9 @@ const Navbar = () => {
           <li>
             <NavLink to={"/myBooks"}>My Books </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to={"/profile"}>Profile </NavLink>
-          </li>
+          </li> */}
         </>
       )}
     </>
@@ -50,8 +60,8 @@ const Navbar = () => {
       });
   };
   return (
-    <nav className="fixed dark:bg-black bg-white border top-0 w-full shadow z-50 md:container mx-auto">
-      <div className="navbar shadow-sm">
+    <nav className="fixed  dark:bg-black bg-white  border top-0 w-full shadow z-50 md:container mx-auto">
+      <div className="navbar shadow-sm mx-auto w-[98%]">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -77,9 +87,7 @@ const Navbar = () => {
             >
               {links}
               {user ? (
-                <button onClick={handleSignOut} className="btn">
-                  Log Out
-                </button>
+                <></>
               ) : (
                 <>
                   <Link to={"/signIn"} className="btn border border-primary">
@@ -118,9 +126,44 @@ const Navbar = () => {
         <div className="navbar-end space-x-3">
           <ModeToggle />
           {user ? (
-            <button onClick={handleSignOut} className="btn hidden md:flex">
-              Log Out
-            </button>
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Avatar className="h-12 w-12 border-2 border-primary rounded-full">
+                    {" "}
+                    {/* default size is usually h-10 w-10 */}
+                    <AvatarImage
+                      src={user?.photoURL || ""}
+                      alt="User"
+                      className="h-16 w-16 object-cover"
+                    />
+                    <AvatarFallback className="text-xl">
+                      {user?.displayName?.slice(0, 1).toUpperCase() || "NA"}
+                    </AvatarFallback>
+                  </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>{user.displayName}</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>Team</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <button
+                      onClick={handleSignOut}
+                      className="btn hidden md:flex"
+                    >
+                      Log Out
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* <button onClick={handleSignOut} className="btn hidden md:flex">
+                Log Out
+              </button> */}
+            </>
           ) : (
             <div className="hidden md:flex gap-3">
               <Link to={"/signIn"} className="btn border border-primary">
