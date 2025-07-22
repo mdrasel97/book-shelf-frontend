@@ -31,35 +31,6 @@ const BookDetails = () => {
       .catch((err) => toast.error("Error fetching upvote:", err.message));
   }, [_id]);
 
-  // 🔼 Handle Upvote
-  // const handleUpvote = async () => {
-  //   const userEmail = user?.email;
-
-  //   if (!userEmail) {
-  //     toast.error("Please login to upvote.");
-  //     return;
-  //   }
-  //   try {
-  //     const res = await fetch(
-  //       `https://book-shelf-server-phi.vercel.app/books/${_id}/upvote`,
-  //       {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     );
-  //     const result = await res.json();
-
-  //     if (res.ok) {
-  //       setUpvote(result.upvote);
-  //       toast.success("You upvoted this book!");
-  //     } else {
-  //       toast.error(result.error || "Failed to upvote");
-  //     }
-  //   } catch (error) {
-  //     toast.error("Error: " + error.message);
-  //   }
-  // };
-
   const handleUpvote = async () => {
     const userEmail = user?.email;
 
@@ -98,7 +69,7 @@ const BookDetails = () => {
     <>
       <div className="max-w-4xl mx-auto p-6 rounded-2xl border border-primary shadow-lg mt-16 pt-5 mb-5">
         <title>Book Details</title>
-        <div className="flex flex-col md:flex-row items-start gap-6">
+        <div className="flex flex-col md:flex-row items-start gap-6 mt-18">
           <div>
             <img
               src={cover_photo}

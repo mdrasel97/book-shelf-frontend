@@ -100,7 +100,7 @@ const ReviewForm = ({ bookId, reviews, setReviews }) => {
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="w-full border rounded p-2"
+          className="w-full border border-primary rounded p-2"
           rows={3}
           required
         />
