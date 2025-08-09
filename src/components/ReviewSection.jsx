@@ -8,7 +8,7 @@ const ReviewSection = ({ bookId }) => {
 
   useEffect(() => {
     if (bookId) {
-      fetch(`http://localhost:5000/reviews/${bookId}`)
+      fetch(`https://book-shelf-server-phi.vercel.app/reviews/${bookId}`)
         .then((res) => res.json())
         .then((data) => setReviews(data))
         .catch((err) => toast.error("Failed to load reviews:", err));

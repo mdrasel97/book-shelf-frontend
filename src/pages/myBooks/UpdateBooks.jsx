@@ -27,7 +27,7 @@ const UpdateBooks = () => {
     const formData = new FormData(form);
     const { ...restUpdate } = Object.fromEntries(formData.entries());
     // console.log(restUpdate);
-    fetch(`http://localhost:5000/books/${_id}`, {
+    fetch(`https://book-shelf-server-phi.vercel.app/books/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

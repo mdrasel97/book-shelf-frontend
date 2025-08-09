@@ -25,7 +25,7 @@ const ExploreCategory = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/books-summary")
+      .get("https://book-shelf-server-phi.vercel.app/books-summary")
       .then((res) => {
         setCategories(res.data);
       })

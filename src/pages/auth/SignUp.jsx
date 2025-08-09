@@ -52,7 +52,7 @@ const SignUp = () => {
             };
 
             // Save userProfile to my DB
-            fetch("http://localhost:5000/users", {
+            fetch("https://book-shelf-server-phi.vercel.app/users", {
               method: "POST",
               headers: {
                 "content-type": "application/json",

@@ -9,7 +9,9 @@ export default function CategoryPage() {
   const { loading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/books/category/${categoryName}`)
+    fetch(
+      `https://book-shelf-server-phi.vercel.app/books/category/${categoryName}`
+    )
       .then((res) => res.json())
       .then((data) => setBooks(data))
       .catch((err) => console.error(err));

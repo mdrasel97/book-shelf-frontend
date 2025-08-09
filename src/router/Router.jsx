@@ -25,20 +25,21 @@ export const router = createBrowserRouter([
       {
         path: "/",
         Component: Home,
-        loader: () => fetch("http://localhost:5000/popular-books"),
+        loader: () =>
+          fetch("https://book-shelf-server-phi.vercel.app/popular-books"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "bookShelf",
         Component: BookShelf,
-        loader: () => fetch("http://localhost:5000/books"),
+        loader: () => fetch("https://book-shelf-server-phi.vercel.app/books"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "bookDetails/:id",
         Component: BookDetails,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/books/${params.id}`),
+          fetch(`https://book-shelf-server-phi.vercel.app/books/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -65,7 +66,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/books/${params.id}`),
+          fetch(`https://book-shelf-server-phi.vercel.app/books/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {

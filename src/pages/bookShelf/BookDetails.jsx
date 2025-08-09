@@ -25,7 +25,7 @@ const BookDetails = () => {
 
   // 📌 Fetch upvote count
   useEffect(() => {
-    fetch(`http://localhost:5000/books/${_id}`)
+    fetch(`https://book-shelf-server-phi.vercel.app/books/${_id}`)
       .then((res) => res.json())
       .then((data) => setUpvote(data.upvoteCount))
       .catch((err) => toast.error("Error fetching upvote:", err.message));
@@ -41,13 +41,16 @@ const BookDetails = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/books/${_id}/upvote`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email: userEmail }),
-      });
+      const res = await fetch(
+        `https://book-shelf-server-phi.vercel.app/books/${_id}/upvote`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: userEmail }),
+        }
+      );
 
       const result = await res.json();
 

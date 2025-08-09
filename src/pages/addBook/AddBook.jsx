@@ -23,7 +23,7 @@ const AddBook = () => {
     };
 
     // mongodb add book
-    fetch("http://localhost:5000/books", {
+    fetch("https://book-shelf-server-phi.vercel.app/books", {
       method: "POST",
       headers: {
         "content-type": "application/json",

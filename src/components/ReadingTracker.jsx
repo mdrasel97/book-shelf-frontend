@@ -24,7 +24,7 @@ const ReadingTracker = ({
     try {
       const token = await user.getIdToken();
       const response = await fetch(
-        `http://localhost:5000/books/${bookId}/reading-status`,
+        `https://book-shelf-server-phi.vercel.app/books/${bookId}/reading-status`,
         {
           method: "PATCH",
           headers: {
