@@ -80,7 +80,7 @@ const ExploreCategory = () => {
 
             return (
               <motion.div
-                key={category._id || index}
+                key={index}
                 className="group cursor-pointer"
                 custom={index}
                 variants={cardVariants}
@@ -95,7 +95,6 @@ const ExploreCategory = () => {
                       alt={`Category ${index + 1}`}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div
@@ -121,17 +120,9 @@ const ExploreCategory = () => {
                       <span className="text-sm">
                         {category.count?.toLocaleString() || 0} books
                       </span>
-                      {/* <button
-                        onClick={() =>
-                          (window.location.href = `/category/${category.category}`)
-                        }
-                        className="btn bg-primary text-white border-primary transition-colors"
-                      >
-                        Explore →
-                      </button> */}
                       <button
                         onClick={() =>
-                          navigate(`/category/${category.book_category}`)
+                          navigate(`/category/${category.category}`)
                         }
                         className="btn bg-primary text-white border-primary transition-colors"
                       >
