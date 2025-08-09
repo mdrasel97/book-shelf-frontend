@@ -21,11 +21,11 @@ const ExploreCategory = () => {
     booksByCategory: [],
   });
 
-  // console.log(categories.booksByCategory);
+  console.log(categories.booksByCategory);
 
   useEffect(() => {
     axios
-      .get("https://book-shelf-server-phi.vercel.app/books-summary")
+      .get("http://localhost:5000/books-summary")
       .then((res) => {
         setCategories(res.data);
       })

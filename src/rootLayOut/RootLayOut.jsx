@@ -17,7 +17,7 @@ const RootLayOut = () => {
   }
 
   return (
-    <div className="md:container mx-auto">
+    <div className="">
       <Navbar />
       <div className="md:min-h-screen">
         <Outlet />

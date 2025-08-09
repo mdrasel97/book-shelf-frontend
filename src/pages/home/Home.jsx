@@ -14,7 +14,7 @@ const Home = () => {
     <div className="mt-16">
       <title>bookShelf || Home</title>
       <Banner />
-      <div className="my-10">
+      <div className="my-10 md:container mx-auto">
         <h2 className="text-3xl text-center font-semibold">Popular Books</h2>
         <p className="text-center mb-5 text-sx">
           Discover what our community is reading

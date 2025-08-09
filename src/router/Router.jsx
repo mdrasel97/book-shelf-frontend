@@ -15,6 +15,7 @@ import Loading from "../components/Loading";
 import EditProfile from "../pages/profile/EditProfile";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import CategoryBook from "../pages/home/CategoryBook";
 
 export const router = createBrowserRouter([
   {
@@ -24,29 +25,20 @@ export const router = createBrowserRouter([
       {
         path: "/",
         Component: Home,
-        loader: () =>
-          fetch("https://book-shelf-server-phi.vercel.app/popular-books"),
+        loader: () => fetch("http://localhost:5000/popular-books"),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
         path: "bookShelf",
         Component: BookShelf,
-        loader: () => fetch("https://book-shelf-server-phi.vercel.app/books"),
+        loader: () => fetch("http://localhost:5000/books"),
         hydrateFallbackElement: <Loading></Loading>,
       },
-      // {
-      //   path: "/category/:categoryName",
-      //   Component: CategoryBook,
-      //   loader: ({ params }) =>
-      //     fetch(
-      //       `https://book-shelf-server-phi.vercel.app/books ${params.categoryName}`
-      //     ),
-      // },
       {
         path: "bookDetails/:id",
         Component: BookDetails,
         loader: ({ params }) =>
-          fetch(`https://book-shelf-server-phi.vercel.app/books/${params.id}`),
+          fetch(`http://localhost:5000/books/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
       },
       {
@@ -73,8 +65,12 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://book-shelf-server-phi.vercel.app/books/${params.id}`),
+          fetch(`http://localhost:5000/books/${params.id}`),
         hydrateFallbackElement: <Loading></Loading>,
+      },
+      {
+        path: "/category/:categoryName",
+        element: <CategoryBook />,
       },
       {
         path: "profile",

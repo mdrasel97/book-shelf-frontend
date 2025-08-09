@@ -22,7 +22,7 @@ const MyBooks = () => {
     // setLoading(true);
     setListingLoading(true);
 
-    fetch(`https://book-shelf-server-phi.vercel.app/my-books/${email}`, {
+    fetch(`http://localhost:5000/my-books/${email}`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -52,7 +52,7 @@ const MyBooks = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://book-shelf-server-phi.vercel.app/books/${id}`, {
+        fetch(`http://localhost:5000/books/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

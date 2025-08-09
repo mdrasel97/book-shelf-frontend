@@ -61,7 +61,7 @@ const Navbar = () => {
   };
   return (
     <nav className="fixed  dark:bg-black bg-white  border top-0 w-full shadow z-50  mx-auto">
-      <div className="navbar shadow-sm mx-auto w-[98%]">
+      <div className="navbar shadow-sm mx-auto w-[98%] md:container">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -151,10 +151,7 @@ const Navbar = () => {
                   <DropdownMenuItem>Team</DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <button
-                      onClick={handleSignOut}
-                      className="btn hidden md:flex"
-                    >
+                    <button onClick={handleSignOut} className="btn md:flex">
                       Log Out
                     </button>
                   </DropdownMenuItem>

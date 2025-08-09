@@ -20,7 +20,7 @@ const Profile = () => {
       try {
         const token = await user.getIdToken(); // Firebase Token
         const res = await axios.get(
-          `https://book-shelf-server-phi.vercel.app/profile-summary/${user.email}`,
+          `http://localhost:5000/profile-summary/${user.email}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

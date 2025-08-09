@@ -36,14 +36,11 @@ const ReviewForm = ({ bookId, reviews, setReviews }) => {
     };
 
     if (existingReview) {
-      fetch(
-        `https://book-shelf-server-phi.vercel.app/reviews/${existingReview._id}`,
-        {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(bookReview),
-        }
-      )
+      fetch(`http://localhost:5000/reviews/${existingReview._id}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(bookReview),
+      })
         .then((res) => res.json())
         .then(() => {
           const updated = reviews.map((r) =>
@@ -53,7 +50,7 @@ const ReviewForm = ({ bookId, reviews, setReviews }) => {
           toast.success("Review updated!");
         });
     } else {
-      fetch("https://book-shelf-server-phi.vercel.app/reviews", {
+      fetch("http://localhost:5000/reviews", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ ...bookReview, createdAt: new Date() }),

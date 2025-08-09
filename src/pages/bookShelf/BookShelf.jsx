@@ -26,7 +26,7 @@ const BookShelf = () => {
   });
 
   return (
-    <div className="w-11/12 mx-auto mt-16 pt-6">
+    <div className="w-11/12 mx-auto mt-16 pt-6 md:container">
       <title>All Books</title>
       <h2 className="text-2xl font-bold my-5 text-center">
         All Books This page{" "}
