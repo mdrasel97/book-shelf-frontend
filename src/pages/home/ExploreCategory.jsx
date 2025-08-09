@@ -21,7 +21,7 @@ const ExploreCategory = () => {
     booksByCategory: [],
   });
 
-  console.log(categories.booksByCategory);
+  // console.log(categories.booksByCategory);
 
   useEffect(() => {
     axios

@@ -48,7 +48,9 @@ const Profile = () => {
   return (
     <div className="max-w-6xl mx-auto mt-16 px-4">
       <title>profile || bookShelf</title>
-      <h1 className="text-3xl font-bold text-center mb-10">👤 Profile Page</h1>
+      <h1 className="text-3xl font-bold text-center mb-10 pt-10">
+        👤 Profile Page
+      </h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* User Info */}
