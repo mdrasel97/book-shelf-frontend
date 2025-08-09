@@ -18,7 +18,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = await user.getIdToken(); // Firebase Token
+        const token = await user.getIdToken();
         const res = await axios.get(
           `http://localhost:5000/profile-summary/${user.email}`,
           {

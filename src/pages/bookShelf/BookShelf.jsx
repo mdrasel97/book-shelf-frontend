@@ -26,13 +26,13 @@ const BookShelf = () => {
   });
 
   return (
-    <div className="w-11/12 mx-auto mt-16 pt-6 md:container">
+    <div className="w-10/12 mx-auto mt-16 pt-6 md:container">
       <title>All Books</title>
       <h2 className="text-2xl font-bold my-5 text-center">
         All Books This page{" "}
       </h2>
       {/* Filters Section */}
-      <div className="flex flex-col md:flex-row gap-4 mb-6">
+      <div className="flex w-11/12 mx-auto flex-col md:flex-row gap-4 mb-6">
         {/* Search input */}
         <input
           type="text"
@@ -56,7 +56,7 @@ const BookShelf = () => {
       </div>
 
       {/* Book cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 w-11/12 mx-auto md:grid-cols-4 gap-3">
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book) => (
             <BookCard key={book._id} book={book}></BookCard>
