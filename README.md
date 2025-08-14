@@ -6,6 +6,18 @@
 
 ---
 
+## 🚀 Screenshots
+
+### Home Page
+
+![Home Page](/src/assets/homePage.png)
+
+### Featured Roommates Section
+
+![Featured Roommates](/src/assets/Featured.png)
+
+---
+
 ## 🧑‍💻 Features
 
 - 🔐 **Authentication** (Email/Password & Google via Firebase)
